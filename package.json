@@ -26,7 +26,11 @@
   },
   "devDependencies": {
     "grunt-contrib-watch": "~0.2.0",
-    "grunt-node-webkit-builder": "^0.1.19"
+    "grunt-node-webkit-builder": "^0.1.19",
+    "nodewebkit": "^0.8.5-3"
+  },
+  "scripts": {
+    "start": "nodewebkit"
   },
   "keywords": []
 }
