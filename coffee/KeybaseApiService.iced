@@ -52,6 +52,7 @@
         cb null, result.data.session, result.data.me
       else
         cb new Error(result.data.status.desc), null, null
+
     lookup: (username, cb) ->
       url = "#{baseUrl}/user/lookup.json?username=#{username}"
 
@@ -61,5 +62,13 @@
         cb new Error(result.data.status.desc), null
       else
         cb null, result.data.them
+
+    logout: (cb) ->
+      if !!$http.defaults.headers.common.Cookie
+        cb new Error("The user wasn't signed in!")
+      else
+        $http.post("#{baseUrl}/session/killall.json").then defer result
+        $http.defaults.headers.common.Cookie = ""
+        cb(null)
   }
 ]
