@@ -25,7 +25,7 @@ module.exports = function (grunt) {
         separator: ';',
       },
       jsLibs: {
-        src: ['bower_components/angular/angular.js', 'bower_components/bootstrap/dist/js/bootstrap.js'],
+        src: ['bower_components/jquery/dist/jquery.js', 'bower_components/angular/angular.js', 'bower_components/bootstrap/dist/js/bootstrap.js'],
         dest: 'build/js/libs.js',
       },
       cssLibs: {

@@ -42,6 +42,7 @@
   },
   "keywords": [],
   "dependencies": {
-    "gaze": "^0.6.1"
+    "gaze": "^0.6.1",
+    "iced-coffee-script": "^1.7.1-b"
   }
 }
