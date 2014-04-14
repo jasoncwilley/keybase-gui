@@ -44,6 +44,7 @@
   "dependencies": {
     "gaze": "^0.6.1",
     "iced-coffee-script": "^1.7.1-b",
-    "triplesec": "^3.0.10"
+    "triplesec": "^3.0.10",
+    "openpgp": "^0.5.1"
   }
 }
