@@ -1,13 +1,19 @@
-<html>
+<html ng-app="keybaseGui">
 <head>
     <title>Hello World!</title>
     <link rel="stylesheet" type="text/css" href="build/css/bootstrap.css" />
     <script src="build/js/libs.js"></script>
+    <script src="build/js/app.js"></script>
     <script src="http://localhost:35729/livereload.js"></script>
 </head>
 <body>
-  <h1>Hello World!</h1>
-  We are using node.js <script>document.write(process.version); document.write(new Date())</script> Wors.
+  <h1>Keybase Gui!</h1>
+
+  <div ng-controller='LoginController'>
+    <input ng-model="username" />
+    <input type="password" ng-model="password" />
+    <button ng-click="login()">Log In</button>
+  </div>
 
   <script>
     var Gaze = require('gaze').Gaze;

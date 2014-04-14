@@ -1,0 +1,1 @@
+@keybaseGui = angular.module('keybaseGui', []);
