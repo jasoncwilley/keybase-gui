@@ -52,5 +52,14 @@
         cb null, result.data.session, result.data.me
       else
         cb new Error(result.data.status.desc), null, null
+    lookup: (username, cb) ->
+      url = "#{baseUrl}/user/lookup.json?username=#{username}"
+
+      await $http.get(url).then defer result
+
+      if result.data.status.code != 0
+        cb new Error(result.data.status.desc), null
+      else
+        cb null, result.data.them
   }
 ]

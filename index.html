@@ -15,6 +15,12 @@
     <button ng-click="login()">Log In</button>
   </div>
 
+  <div ng-controller='UserSearchController'>
+    <input ng-model="username" />
+    <button ng-click="lookup()">Search</button>
+    {{user.profile.full_name}}
+  </div>
+
   <script>
     var Gaze = require('gaze').Gaze;
     var gaze = new Gaze(['index.html', 'build/**/*']);
