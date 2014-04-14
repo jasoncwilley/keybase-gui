@@ -1,0 +1,17 @@
+{
+  "name": "keybase-gui",
+  "version": "0.0.0",
+  "homepage": "https://github.com/jhbruhn/keybase-gui",
+  "authors": [
+    "Jan-Henrik Bruhn <jh.bruhn@me.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
