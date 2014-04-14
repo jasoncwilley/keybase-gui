@@ -6,7 +6,7 @@ module.exports = function (grunt) {
     coffee: {
       compile: {
         files: {
-          'build/js/app.js': 'coffee/**/*.iced'
+          'build/js/app.js': ['coffee/KeybaseGuiApp.iced', 'coffee/**/*.iced']
         }
       }
     },

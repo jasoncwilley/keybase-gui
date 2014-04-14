@@ -43,6 +43,7 @@
   "keywords": [],
   "dependencies": {
     "gaze": "^0.6.1",
-    "iced-coffee-script": "^1.7.1-b"
+    "iced-coffee-script": "^1.7.1-b",
+    "triplesec": "^3.0.10"
   }
 }

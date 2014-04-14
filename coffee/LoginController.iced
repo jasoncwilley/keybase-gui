@@ -1,3 +1,4 @@
-@keybaseGui.controller 'LoginController', ($scope) ->
+@keybaseGui.controller 'LoginController', ["$scope", "keybaseApi", ($scope, keybaseApi) ->
   $scope.login = ->
-    alert "Hello, " + $scope.username + "!"
+    await keybaseApi.login $scope.username, $scope.password, defer err, session, me
+]
