@@ -40,5 +40,8 @@
   "scripts": {
     "start": "nodewebkit"
   },
-  "keywords": []
+  "keywords": [],
+  "dependencies": {
+    "gaze": "^0.6.1"
+  }
 }
