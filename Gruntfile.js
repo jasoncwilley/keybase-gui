@@ -10,36 +10,41 @@ module.exports = function (grunt) {
         }
       }
     },
+    sass: {
+      dist: {
+        options: {
+          style: 'expanded'
+        },
+        files: {
+          'build/css/app.css': 'sass/**/*.scss'
+        }
+      }
+    },
     concat: {
       options: {
         separator: ';',
       },
-      libs: {
-        src: ['bower_components/angular/angular.js'],
+      jsLibs: {
+        src: ['bower_components/angular/angular.js', 'bower_components/bootstrap/dist/js/bootstrap.js'],
         dest: 'build/js/libs.js',
+      },
+      cssLibs: {
+        src: ['bower_components/bootstrap/dist/css/bootstrap.css', 'bower_components/bootstrap/dist/css/bootstrap-theme.css'],
+        dest: 'build/css/bootstrap.css'
       }
     },
     copy: {
-      js: {
+      bootstrapFonts: {
         expand: true,
-        cwd: 'build/js',
-        src: '*.js',
-        dest: 'build/app/js/',
+        cwd: 'bower_components/bootstrap/dist/fonts/',
+        src: '*',
+        dest: 'build/fonts/',
         flatten: true,
         filter: 'isFile'
       },
-      css: {
-        src: 'build/css/*',
-        des: 'build/app/css/',
-        flatten: true
-      },
-      fonts: {
-        src: 'fonts/*',
-        dest: 'build/app/fonts/'
-      },
       images: {
         src: 'images/*',
-        dest: 'build/app/images'
+        dest: 'build/images'
       }
     },
     clean: {
@@ -65,7 +70,7 @@ module.exports = function (grunt) {
         linux32: false, // We don't need linux32
         linux64: false // We don't need linux64
       },
-      src: ['build/app/**', './node_modules/**', '!./node_modules/grunt*/**',
+      src: ['build/**', './node_modules/**', '!./node_modules/grunt*/**',
              '!./node_modules/nodewebkit*/**', './index.html', './package.json',
              './README.md' ]
     }
@@ -78,14 +83,16 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-iced-coffee');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-sass');
 
   grunt.registerTask('dev', ['build', 'watch']);
 
-  grunt.registerTask('build-js-libs', ['concat:libs']);
+  grunt.registerTask('build-js-libs', ['concat:jsLibs']);
   grunt.registerTask('build-js-app', ['coffee']);
-  grunt.registerTask('build-js', ['build-js-libs', 'build-js-app', 'copy:js']);
-  grunt.registerTask('build-css', ['copy:css']);
-  grunt.registerTask('build-fonts', ['copy:fonts']);
+  grunt.registerTask('build-js', ['build-js-libs', 'build-js-app']);
+  grunt.registerTask('build-css', ['sass', 'build-css-libs']);
+  grunt.registerTask('build-css-libs', ['concat:cssLibs']);
+  grunt.registerTask('build-fonts', ['copy:bootstrapFonts']);
   grunt.registerTask('build-images', ['copy:images']);
   grunt.registerTask('build', ['build-js', 'build-css', 'build-fonts', 'build-images']);
 
