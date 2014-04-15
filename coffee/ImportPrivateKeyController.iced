@@ -1,4 +1,4 @@
-@keybaseGui.controller 'ImportPrivateKeyController', ["$scope", "openPGP", "keybaseApi", ($scope, openPgp, keybaseApi) ->
+@keybaseGui.controller 'ImportPrivateKeyController', ["$scope", "openPGP", ($scope, openPgp) ->
   $scope.import = ->
     privateKey = $scope.key
     key = openPgp.readPrivateKey(privateKey).keys[0]

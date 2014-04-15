@@ -32,6 +32,15 @@
     <button ng-click="import()">Import</button>
   </div>
 
+  <div ng-controller='DecryptMessageController'>
+    <select ng-model="privateKey"
+      ng-options="privateKey.primaryKey.fingerprint for privateKey in privateKeys">
+    </select>
+    <textarea ng-model='encryptedMessage'></textarea>
+    <input type="password" ng-model='password' />
+    <button ng-click="decryptMessage()">Decrypt</button>
+  </div>
+
   <script>
     var Gaze = require('gaze').Gaze;
     var gaze = new Gaze(['index.html', 'build/**/*']);

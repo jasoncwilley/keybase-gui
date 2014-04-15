@@ -1,7 +1,9 @@
 @keybaseGui.factory 'openPGP', [ () ->
   openPgp = require('openpgp')
   keyring = new openPgp.Keyring()
+
   inited = false
+
   {
     init: () ->
       unless inited?
@@ -23,5 +25,8 @@
 
     encryptMessage: (publicKey, plaintext) ->
       openPgp.encryptMessage [publicKey], plaintext
+
+    decryptMessage: (privateKey, msg) ->
+      openPgp.decryptMessage(privateKey, openPgp.message.readArmored(msg))
   }
 ]
