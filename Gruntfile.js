@@ -5,6 +5,9 @@ module.exports = function (grunt) {
   grunt.initConfig({
     coffee: {
       compile: {
+        options: {
+          sourceMap: true
+        },
         files: {
           'build/js/app.js': ['coffee/KeybaseGuiApp.iced', 'coffee/**/*.iced']
         }

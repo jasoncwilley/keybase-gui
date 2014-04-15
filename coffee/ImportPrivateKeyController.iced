@@ -1,9 +1,12 @@
 @keybaseGui.controller 'ImportPrivateKeyController', ["$scope", "openPGP", ($scope, openPgp) ->
-  $scope.import = ->
+  $scope.importKey = ->
     privateKey = $scope.key
-    key = openPgp.readPrivateKey(privateKey).keys[0]
+
+    await openPgp.readPrivateKey privateKey, defer key
+
+    key = key.keys[0]
 
     if key and key.isPrivate
-      data = openPgp.storePrivateKey(privateKey)
+      await openPgp.storePrivateKey(privateKey)
 
   ]

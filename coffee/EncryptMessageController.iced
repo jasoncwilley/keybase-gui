@@ -8,8 +8,11 @@
     await keybaseApi.lookup receiverName, defer err, them
 
     primaryKeyString = them.public_keys.primary.bundle
-    primaryKey = openPgp.readPublicKey(primaryKeyString).keys[0]
+    await openPgp.readPublicKey(primaryKeyString, defer primaryKey)
 
-    encrypted = openPgp.encryptMessage primaryKey, plainText
-    $scope.encrypted = encrypted
+    primaryKey = primaryKey.keys[0]
+
+    await openPgp.encryptMessage primaryKey, plainText, defer encrypted
+    $scope.$apply ->
+      $scope.encrypted = encrypted
   ]
