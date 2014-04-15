@@ -10,6 +10,6 @@
     primaryKeyString = them.public_keys.primary.bundle
     primaryKey = openPgp.readPublicKey(primaryKeyString).keys[0]
 
-    await openPgp.encryptMessage primaryKey, plainText, defer encrypted
+    encrypted = openPgp.encryptMessage primaryKey, plainText
     $scope.encrypted = encrypted
   ]

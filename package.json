@@ -30,7 +30,6 @@
   "devDependencies": {
     "grunt-contrib-watch": "~0.2.0",
     "grunt-node-webkit-builder": "^0.1.19",
-    "nodewebkit": "^0.8.5-3",
     "grunt-contrib-copy": "^0.5.0",
     "grunt-iced-coffee": "^0.7.0-a",
     "grunt-contrib-concat": "^0.4.0",
@@ -45,6 +44,6 @@
     "gaze": "^0.6.1",
     "iced-coffee-script": "^1.7.1-b",
     "triplesec": "^3.0.10",
-    "openpgp": "^0.5.1"
+    "openpgp": "jhbruhn/openpgpjs"
   }
 }
