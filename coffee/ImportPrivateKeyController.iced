@@ -8,5 +8,5 @@
 
     if key and key.isPrivate
       await openPgp.storePrivateKey(privateKey)
-
+      $scope.apply
   ]
