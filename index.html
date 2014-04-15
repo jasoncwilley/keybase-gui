@@ -1,10 +1,9 @@
 <html ng-app="keybaseGui">
 <head>
-    <title>Hello World!</title>
+    <title>Keybase GUI</title>
     <link rel="stylesheet" type="text/css" href="build/css/bootstrap.css" />
     <script src="build/js/libs.js"></script>
     <script src="build/js/app.js"></script>
-    <script src="http://localhost:35729/livereload.js"></script>
 </head>
 <body>
   <h1>Keybase Gui!</h1>
@@ -26,6 +25,11 @@
     <textarea ng-model='plaintext'></textarea>
     <button ng-click="encrypt()">Encrypt</button>
     <textarea ng-model='encrypted'></textarea>
+  </div>
+
+  <div ng-controller='ImportPrivateKeyController'>
+    <textarea ng-model='key'></textarea>
+    <button ng-click="import()">Import</button>
   </div>
 
   <script>
