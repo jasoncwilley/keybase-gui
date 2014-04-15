@@ -21,6 +21,13 @@
     {{user.profile.full_name}}
   </div>
 
+  <div ng-controller='EncryptMessageController'>
+    <input ng-model='receiver' />
+    <textarea ng-model='plaintext'></textarea>
+    <button ng-click="encrypt()">Encrypt</button>
+    <textarea ng-model='encrypted'></textarea>
+  </div>
+
   <script>
     var Gaze = require('gaze').Gaze;
     var gaze = new Gaze(['index.html', 'build/**/*']);
