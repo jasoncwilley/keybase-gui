@@ -35,7 +35,7 @@
       process.nextTick () ->
         cb keyring.privateKeys.keys
 
-    getStorePublicKeys: (cb) ->
+    getStoredPublicKeys: (cb) ->
       process.nextTick () ->
         cb keyring.publicKeys.keys
 
