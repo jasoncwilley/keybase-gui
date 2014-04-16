@@ -5,8 +5,15 @@
   $scope.lookup = ->
     await keybaseApi.lookup $scope.username, defer err, user
 
-    $scope.friends.push user
-    $scope.user = user
+    found = false
 
-    await openPgp.storePublicKey(user.public_keys.primary.bundle)
+    angular.forEach $scope.friends, (value, key) ->
+      found = true if value.id == user.id
+
+    unless found
+      $rootScope.friends.push user
+
+    $scope.user = user
+    unless found
+      await openPgp.storePublicKey(user.public_keys.primary.bundle)
 ]
