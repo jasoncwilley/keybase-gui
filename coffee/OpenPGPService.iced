@@ -39,6 +39,16 @@
       process.nextTick () ->
         cb keyring.publicKeys.keys
 
+    getPublicKeysForKeyId: (keyId, deep, cb) ->
+      process.nextTick() ->
+        keys = keyring.publicKeys.getForId(keyId, deep)
+        cb keys
+
+    getPublicKeysForEmail: (email, cb) ->
+      process.nextTick() ->
+        keys = keystore.publicKeys.getForAddress(email)
+        cb keys
+
     getStoredPrivateKeysSync: ->
       keyring.privateKeys.keys
 
