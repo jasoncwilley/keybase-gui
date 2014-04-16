@@ -63,6 +63,15 @@
       else
         cb null, result.data.them
 
+    autocomplete: (query, cb) ->
+      url = "#{baseUrl}user/autocomplete.json?q=#{query}"
+
+      await $http.get(url).then defer result
+      results = []
+
+      angular.forEach result.data.completions, (value, index) ->
+        results.push value.components.username.val
+
     logout: (cb) ->
       if !!$http.defaults.headers.common.Cookie
         cb new Error("The user wasn't signed in!")
