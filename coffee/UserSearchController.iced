@@ -2,6 +2,13 @@
 'keybaseApi', 'storage', 'openPGP', ($scope, $rootScope, keybaseApi, storage, openPgp) ->
   storage.bind($rootScope, "friends", { defaultValue: [] })
 
+  $scope.suggestions = []
+
+  $scope.updateSuggestions = (typed) ->
+    await keybaseApi.autocomplete typed, defer suggestions
+    $scope.suggestions = suggestions
+    console.log suggestions
+
   $scope.lookup = ->
     await keybaseApi.lookup $scope.username, defer err, user
 

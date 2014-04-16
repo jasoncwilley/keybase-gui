@@ -64,13 +64,15 @@
         cb null, result.data.them
 
     autocomplete: (query, cb) ->
-      url = "#{baseUrl}user/autocomplete.json?q=#{query}"
+      url = "#{baseUrl}/user/autocomplete.json?q=#{query}"
 
       await $http.get(url).then defer result
       results = []
 
       angular.forEach result.data.completions, (value, index) ->
         results.push value.components.username.val
+
+      cb results
 
     logout: (cb) ->
       if !!$http.defaults.headers.common.Cookie
