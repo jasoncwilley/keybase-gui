@@ -59,5 +59,9 @@
     decryptMessage: (privateKey, msg, cb) ->
       process.nextTick () ->
         cb openPgp.decryptMessage(privateKey, openPgp.message.readArmored(msg))
+
+    signCleartextMessage: (privateKey, msg, cb) ->
+      process.nextTick () ->
+        cb openPgp.signClearMessage([privateKey], msg)
   }
 ]

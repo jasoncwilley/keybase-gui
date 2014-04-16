@@ -54,6 +54,17 @@
     <button ng-click="decryptMessage()">Decrypt</button>
   </div>
 
+  <div ng-controller='SignCleartextMessageController'>
+    <h2>Sign a Cleartext Message</h2>
+    <select ng-model="privateKey"
+      ng-options="privateKey.primaryKey.fingerprint for privateKey in privateKeys">
+    </select>
+    <textarea ng-model='plaintext'></textarea>
+    <input type="password" ng-model='password' />
+    <textarea ng-model='signed'></textarea>
+    <button ng-click="signMessage()">Sign</button>
+  </div>
+
   <script>
     var Gaze = require('gaze').Gaze;
     var gaze = new Gaze(['index.html', 'build/**/*']);
