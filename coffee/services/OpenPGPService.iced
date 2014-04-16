@@ -63,5 +63,11 @@
     signCleartextMessage: (privateKey, msg, cb) ->
       process.nextTick () ->
         cb openPgp.signClearMessage([privateKey], msg)
+
+    getSigningKeyIdsMessage: (msg, cb) ->
+      process.nextTick () ->
+        msg = openPgp.cleartext.readArmored(msg)
+        signingKeyIds = msg.getSigningKeyIds()
+        cb signingKeyIds
   }
 ]

@@ -65,6 +65,16 @@
     <button ng-click="signMessage()">Sign</button>
   </div>
 
+  <div ng-controller='VerifyCleartextMessageController'>
+    <h2>Verify a cleartext signed message</h2>
+    <textarea ng-model='signedMessage'></textarea>
+    <button ng-click="verifyMessage()">Verify</button>
+    <div ng-show="signers.length > 0">
+      This message was signed by:
+      <ul><li ng-repeat="key in signers">{{ key.users[0].userId.userid }}</li></ul>
+    </div>
+  </div>
+
   <script>
     var Gaze = require('gaze').Gaze;
     var gaze = new Gaze(['index.html', 'build/**/*']);
