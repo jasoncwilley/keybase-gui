@@ -34,6 +34,11 @@
   <div ng-controller='EncryptMessageController'>
     <h2>Encrypt</h2>
     <textarea ng-model='plaintext'></textarea>
+    <input type='checkbox' ng-model='sign' /> Sign Message
+    <select ng-show='sign' ng-model="privateKey"
+      ng-options="privateKey.primaryKey.fingerprint for privateKey in privateKeys">
+    </select>
+    <input type='password' ng-show='sign' ng-model='password' />
     <button ng-click="encrypt()">Encrypt</button>
     <textarea ng-model='encrypted'></textarea>
   </div>

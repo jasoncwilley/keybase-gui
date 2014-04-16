@@ -52,9 +52,14 @@
     getStoredPrivateKeysSync: ->
       keyring.privateKeys.keys
 
-    encryptMessage: (publicKey, plaintext, cb) ->
+    encryptMessage: (publicKey, privateKey, plaintext, cb) ->
       process.nextTick () ->
-        cb openPgp.encryptMessage [publicKey], plaintext
+        enc = null
+        if privateKey
+          enc = openPgp.signAndEncryptMessage([publicKey], privateKey, plaintext)
+        else
+          enc = openPgp.encryptMessage [publicKey], plaintext
+        cb enc
 
     decryptMessage: (privateKey, msg, cb) ->
       process.nextTick () ->

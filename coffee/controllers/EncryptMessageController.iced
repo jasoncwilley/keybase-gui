@@ -1,4 +1,8 @@
 @keybaseGui.controller 'EncryptMessageController', ["$scope", "$rootScope", "openPGP", "keybaseApi", ($scope, $rootScope, openPgp, keybaseApi) ->
+  $scope.sign = false
+  $scope.privateKeys = openPgp.getStoredPrivateKeysSync()
+  $scope.privateKey = $scope.privateKeys[0] unless $scope.privateKeys.length == 0
+
   $scope.encrypt = ->
     openPgp.init()
 
@@ -9,7 +13,14 @@
 
     primaryKey = primaryKey.keys[0]
 
-    await openPgp.encryptMessage primaryKey, plainText, defer encrypted
+    privateKey = null
+    
+    if $scope.sign
+      privateKey = $scope.privateKey
+      if not privateKey.isDecrypted
+        privateKey.decrypt($scope.password)
+
+    await openPgp.encryptMessage primaryKey, privateKey, plainText, defer encrypted
     $scope.$apply ->
       $scope.encrypted = encrypted
   ]
