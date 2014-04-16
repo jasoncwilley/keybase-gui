@@ -20,14 +20,24 @@
         cb key
 
     storePrivateKey: (keyString, cb) ->
-      process.nextTick() ->
+      process.nextTick () ->
         key = keyring.privateKeys.importKey keyString
         keyring.store()
-        cb()
+        cb() if cb
+
+    storePublicKey: (keyString, cb) ->
+      process.nextTick () ->
+        key = keyring.publicKeys.importKey keyString
+        keyring.store()
+        cb() if cb
 
     getStoredPrivateKeys: (cb) ->
       process.nextTick () ->
         cb keyring.privateKeys.keys
+
+    getStorePublicKeys: (cb) ->
+      process.nextTick () ->
+        cb keyring.publicKeys.keys
 
     getStoredPrivateKeysSync: ->
       keyring.privateKeys.keys

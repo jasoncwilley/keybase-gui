@@ -1,4 +1,5 @@
-@keybaseGui.controller 'UserSearchController', ['$scope', '$rootScope', 'keybaseApi', 'storage', ($scope, $rootScope, keybaseApi, storage) ->
+@keybaseGui.controller 'UserSearchController', ['$scope', '$rootScope',
+'keybaseApi', 'storage', 'openPGP', ($scope, $rootScope, keybaseApi, storage, openPgp) ->
   storage.bind($rootScope, "friends", { defaultValue: [] })
 
   $scope.lookup = ->
@@ -6,4 +7,6 @@
 
     $scope.friends.push user
     $scope.user = user
+
+    await openPgp.storePublicKey(user.public_keys.primary.bundle)
 ]
