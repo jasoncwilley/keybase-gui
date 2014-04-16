@@ -1,1 +1,1 @@
-@keybaseGui = angular.module('keybaseGui', []);
+@keybaseGui = angular.module('keybaseGui', ['angularLocalStorage']);
