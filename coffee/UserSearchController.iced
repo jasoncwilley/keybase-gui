@@ -1,13 +1,20 @@
-@keybaseGui.controller 'UserSearchController', ['$scope', '$rootScope',
-'keybaseApi', 'storage', 'openPGP', ($scope, $rootScope, keybaseApi, storage, openPgp) ->
+@keybaseGui.controller 'UserSearchController', ['$scope', '$rootScope', '$timeout',
+'keybaseApi', 'storage', 'openPGP', ($scope, $rootScope, $timeout, keybaseApi, storage, openPgp) ->
   storage.bind($rootScope, "friends", { defaultValue: [] })
 
   $scope.suggestions = []
 
-  $scope.updateSuggestions = (typed) ->
-    await keybaseApi.autocomplete typed, defer suggestions
+  updateTimeout = null
+  typedString = ""
+
+  updateSuggestions = () ->
+    await keybaseApi.autocomplete typedString, defer suggestions
     $scope.suggestions = suggestions
-    console.log suggestions
+
+  $scope.queueUpdateSuggestions = (typed) ->
+    updateTimeout.cancel if updateTimeout
+    typedString = typed
+    $timeout updateSuggestions, 250
 
   $scope.lookup = ->
     await keybaseApi.lookup $scope.username, defer err, user

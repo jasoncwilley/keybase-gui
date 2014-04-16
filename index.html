@@ -15,7 +15,7 @@
   </div>
 
   <div ng-controller='UserSearchController'>
-    <autocomplete ng-model="username" data="suggestions" on-type="updateSuggestions"/>
+    <autocomplete ng-model="username" data="suggestions" on-type="queueUpdateSuggestions"></autocomplete>
     <button ng-click="lookup()">Search</button>
     {{user.profile.full_name}}
   </div>

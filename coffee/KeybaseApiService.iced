@@ -67,9 +67,14 @@
       url = "#{baseUrl}/user/autocomplete.json?q=#{query}"
 
       await $http.get(url).then defer result
+      completions = result.data.completions
+
+      completions.sort (a, b) ->
+        b.totalScore - a.totalScore
+
       results = []
 
-      angular.forEach result.data.completions, (value, index) ->
+      angular.forEach completions, (value, index) ->
         results.push value.components.username.val
 
       cb results
