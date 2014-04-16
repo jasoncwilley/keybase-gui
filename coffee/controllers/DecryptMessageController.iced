@@ -1,6 +1,4 @@
 @keybaseGui.controller 'DecryptMessageController', ["$scope", "openPGP", ($scope, openPgp) ->
-  $scope.privateKeys = openPgp.getStoredPrivateKeysSync()
-  $scope.privateKey = $scope.privateKeys[0] unless $scope.privateKeys.length == 0
 
   $scope.decryptMessage = ->
     privateKey = $scope.privateKey
