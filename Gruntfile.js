@@ -9,7 +9,8 @@ module.exports = function (grunt) {
           sourceMap: true
         },
         files: {
-          'build/js/app.js': ['coffee/KeybaseGuiApp.iced', 'coffee/**/*.iced']
+          'build/js/app.js': ['coffee/KeybaseGuiApp.iced',
+                              'coffee/**/*.iced']
         }
       }
     },
@@ -28,11 +29,18 @@ module.exports = function (grunt) {
         separator: ';',
       },
       jsLibs: {
-        src: ['bower_components/jquery/dist/jquery.js', 'bower_components/angular/angular.js', 'bower_components/bootstrap/dist/js/bootstrap.js', 'bower_components/angular-cookies/angular-cookies.js', 'bower_components/angularLocalStorage/src/angularLocalStorage.js', 'bower_components/allmighty-autocomplete/script/autocomplete.js'],
+        src: ['bower_components/jquery/dist/jquery.js',
+              'bower_components/angular/angular.js',
+              'bower_components/bootstrap/dist/js/bootstrap.js',
+              'bower_components/angular-cookies/angular-cookies.js',
+              'bower_components/angularLocalStorage/src/angularLocalStorage.js',
+              'bower_components/allmighty-autocomplete/script/autocomplete.js'],
         dest: 'build/js/libs.js',
       },
       cssLibs: {
-        src: ['bower_components/bootstrap/dist/css/bootstrap.css', 'bower_components/bootstrap/dist/css/bootstrap-theme.css', 'bower_components/allmighty-autocomplete/style/autocomplete.css'],
+        src: ['bower_components/bootstrap/dist/css/bootstrap.css',
+              'bower_components/bootstrap/dist/css/bootstrap-theme.css',
+              'bower_components/allmighty-autocomplete/style/autocomplete.css'],
         dest: 'build/css/bootstrap.css'
       }
     },
