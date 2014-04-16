@@ -23,7 +23,7 @@
   <div ng-controller='FriendListController'>
     <ul>
       <li ng-repeat="user in friends track by $index">
-        <a href="#" ng-click='selectUser(user)'>{{ user.basics.username }}</a>
+        <a href="#" ng-click='selectUser(user)' data-selected="{{selectedFriend == user}}">{{ user.basics.username }}</a>
       </li>
     </ul>
   </div>
