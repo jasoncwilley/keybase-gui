@@ -3,7 +3,6 @@
   $scope.privateKey = $scope.privateKeys[0] unless $scope.privateKeys.length == 0
 
   $scope.decryptMessage = ->
-    console.log $scope.privateKeys
     privateKey = $scope.privateKey
     if not privateKey.isDecrypted
       privateKey.decrypt($scope.password)
