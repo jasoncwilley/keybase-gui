@@ -1,5 +1,7 @@
-@keybaseGui.controller 'UserSearchController', ['$scope', '$rootScope', '$timeout',
-'keybaseApi', 'storage', 'openPGP', ($scope, $rootScope, $timeout, keybaseApi, storage, openPgp) ->
+@keybaseGui.controller 'UserSearchController', ['$scope', '$rootScope',
+'$timeout', 'keybaseApi', 'storage', 'openPGP',
+($scope, $rootScope, $timeout, keybaseApi, storage, openPgp) ->
+
   storage.bind($rootScope, "friends", { defaultValue: [] })
 
   $scope.suggestions = []

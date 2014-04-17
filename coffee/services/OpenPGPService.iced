@@ -56,14 +56,16 @@
       process.nextTick () ->
         enc = null
         if privateKey
-          enc = openPgp.signAndEncryptMessage([publicKey], privateKey, plaintext)
+          enc = openPgp.signAndEncryptMessage([publicKey],
+                  privateKey, plaintext)
         else
           enc = openPgp.encryptMessage [publicKey], plaintext
         cb enc
 
     decryptMessage: (privateKey, msg, cb) ->
       process.nextTick () ->
-        cb openPgp.decryptMessage(privateKey, openPgp.message.readArmored(msg))
+        cb openPgp.decryptMessage(privateKey,
+            openPgp.message.readArmored(msg))
 
     signCleartextMessage: (privateKey, msg, cb) ->
       process.nextTick () ->

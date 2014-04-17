@@ -1,4 +1,5 @@
-@keybaseGui.controller 'FriendListController', ["$scope", '$rootScope', 'storage', ($scope, $rootScope, storage) ->
+@keybaseGui.controller 'FriendListController', ["$scope", '$rootScope',
+'storage', ($scope, $rootScope, storage) ->
   storage.bind $rootScope, 'friends', { defaultValue: [] }
 
   $rootScope.selectedFriend = null

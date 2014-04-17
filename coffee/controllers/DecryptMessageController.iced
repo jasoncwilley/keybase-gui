@@ -1,4 +1,5 @@
-@keybaseGui.controller 'DecryptMessageController', ["$scope", "openPGP", ($scope, openPgp) ->
+@keybaseGui.controller 'DecryptMessageController', ["$scope", "openPGP",
+($scope, openPgp) ->
 
   $scope.decryptMessage = ->
     privateKey = $scope.privateKey

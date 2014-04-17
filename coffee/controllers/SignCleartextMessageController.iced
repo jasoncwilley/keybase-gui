@@ -1,5 +1,6 @@
-@keybaseGui.controller 'SignCleartextMessageController', ["$scope", "openPGP", ($scope, openPgp) ->
-  
+@keybaseGui.controller 'SignCleartextMessageController', ["$scope", "openPGP",
+($scope, openPgp) ->
+
   $scope.signMessage = () ->
     privateKey = $scope.privateKey
     if not privateKey.isDecrypted
