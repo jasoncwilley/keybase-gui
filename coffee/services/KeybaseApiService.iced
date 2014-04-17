@@ -1,5 +1,6 @@
-@keybaseGui.factory 'keybaseApi', ['$http', ($http) ->
+@keybaseGui.factory 'keybaseApi', ['$http', 'openPGP' ($http, openPgp) ->
   baseUrl = "https://keybase.io/_/api/1.0"
+  openPgp.init()
 
   get_salt = (username, cb) ->
     url = "#{baseUrl}/getsalt.json?email_or_username=#{username}"
@@ -87,6 +88,24 @@
       key = result.data.keys[0]
 
       cb key
+
+    resolveKeyIds: (keyIds, cb) ->
+      notResolvedKeys = []
+      resolvedKeys = []
+      angular.forEach keyIds, (keyId, index) ->
+        url = "#{baseUrl}/key/fetch.json?pgp_key_ids=#{keyId}&ops=4"
+
+        await $http.get(url).then defer result
+
+        key = result.data.keys[0]
+
+        await openPgp.readPublicKey key.bundle, defer foundKey
+        if foundKey
+          foundKey = foundKey.keys[0]
+          resolvedKeys.push foundKey
+        else
+          notResolvedKeys.push keyId
+      cb resolvedKeys, notResolvedKeys
 
     logout: (cb) ->
       if !!$http.defaults.headers.common.Cookie

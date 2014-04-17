@@ -4,29 +4,12 @@
     await openPgp.getStoredPublicKeys defer storedPublicKeys
 
     $scope.signers = []
-    unresolvedKeyIds = []
 
-    angular.forEach keyIds, (keyId, index2) ->
-      keyFound = false
-      angular.forEach storedPublicKeys, (publicKey, index) ->
-        if publicKey.primaryKey.keyid.bytes == keyId.bytes
-          $scope.signers.push publicKey
-          keyFound = true
+    await openPgp.resolveKeyIdsFromStorage keyIds, defer storeResolvedKeys, storeUnresolvedKeys
+    $scope.signers = $scope.signers.concat storeResolvedKeys
 
-      unless keyFound
-        unresolvedKeyIds.push keyId
-
-    stillNotResolvedKeys = []
-    angular.forEach unresolvedKeyIds, (keyId, index) ->
-      await keybaseApi.lookupKey openPgp.hexstrdump(keyId.bytes), defer key
-
-      await openPgp.readPublicKey key.bundle, defer foundKey
-      if foundKey
-        foundKey = foundKey.keys[0]
-        $scope.signers.push foundKey
-        $scope.apply
-      else
-        stillNotResolvedKeys.push keyId
+    await keybaseApi.resolveKeyIds storeUnresolvedKeys, defer kbResolvedKeys, kbUnresolvedKeys
+    $scope.signers = $scope.signers.concat kbResolvedKeys
 
     # TODO: Search on SKS Keyservers (MIT I'd say)
 ]

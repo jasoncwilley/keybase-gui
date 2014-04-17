@@ -75,6 +75,22 @@
         signingKeyIds = msg.getSigningKeyIds()
         cb signingKeyIds
 
+    resolveKeyIdsFromStorage: (keyIds, cb) ->
+      process.nextTick () ->
+        unresolvedKeys = []
+        resolvedKeys = []
+        angular.forEach keyIds, (keyId, index2) ->
+          keyFound = false
+          angular.forEach keyring.publicKeys.keys, (publicKey, index) ->
+            if publicKey.primaryKey.keyid.bytes == keyId.bytes
+              resolvedKeys.push publicKey
+              keyFound = true
+
+          unless keyFound
+            unresolvedKeyIds.push keyId
+
+        cb resolvedKeys, unresolvedKeys
+
     hexstrdump: (str) ->
       openPgp.util.hexstrdump str
   }
