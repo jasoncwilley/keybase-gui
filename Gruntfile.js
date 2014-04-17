@@ -3,6 +3,9 @@
 module.exports = function (grunt) {
   // Project configuration.
   grunt.initConfig({
+    coffeelint: {
+      app: ['coffee/**/*.iced']
+    },
     coffee: {
       compile: {
         options: {
@@ -95,11 +98,12 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadNpmTasks('grunt-coffeelint');
 
   grunt.registerTask('dev', ['build', 'watch']);
 
   grunt.registerTask('build-js-libs', ['concat:jsLibs']);
-  grunt.registerTask('build-js-app', ['coffee']);
+  grunt.registerTask('build-js-app', ['coffeelint', 'coffee']);
   grunt.registerTask('build-js', ['build-js-libs', 'build-js-app']);
   grunt.registerTask('build-css', ['sass', 'build-css-libs']);
   grunt.registerTask('build-css-libs', ['concat:cssLibs']);
