@@ -29,9 +29,10 @@
       <div class='col-md-2 col-xs-4'>
         <div ng-controller='FriendListController'>
           <h2>Friends</h2>
-          <ul>
-            <li ng-repeat="user in friends track by $index">
-              <a href="#" ng-click='selectUser(user)'
+          <ul class="nav nav-pills nav-stacked">
+            <li ng-class="{active: selectedFriend == user}"
+                ng-repeat="user in friends track by $index">
+              <a ng-click='selectUser(user)' href=""
                 data-selected="{{selectedFriend == user}}">{{ user.basics.username }}</a>
             </li>
           </ul>
