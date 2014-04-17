@@ -25,7 +25,11 @@
     "node": ">= 0.8.0"
   },
   "window": {
-    "toolbar": true
+    "toolbar": true,
+    "width": 850,
+    "height": 500,
+    "min_width": 850,
+    "min_height": 500
   },
   "devDependencies": {
     "grunt-contrib-watch": "~0.2.0",
