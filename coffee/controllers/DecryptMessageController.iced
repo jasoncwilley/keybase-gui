@@ -1,8 +1,9 @@
-@keybaseGui.controller 'DecryptMessageController', ["$scope", "openPGP",
-'$modal', "keybaseApi", ($scope, openPgp, $modal, keybaseApi) ->
+@keybaseGui.controller 'DecryptMessageController', ["$scope", "$rootScope",
+ "openPGP", '$modal', "keybaseApi",
+ ($scope, $rootScope, openPgp, $modal, keybaseApi) ->
 
   $scope.decryptMessage = ->
-    privateKey = $scope.privateKey
+    privateKey = $rootScope.data.selectedPrivateKey
 
     if not privateKey.isDecrypted
       modalInstance = $modal.open {

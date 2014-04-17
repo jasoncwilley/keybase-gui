@@ -5,7 +5,7 @@
     <script src="build/js/libs.js"></script>
     <script src="build/js/app.js"></script>
 </head>
-<body>
+<body ng-controller="KeybaseGuiApplicationController">
   <nav class="navbar navbar-default" role="navigation">
     <div class="container-fluid">
       <div class="navbar-header">
@@ -14,7 +14,7 @@
       <ul class="nav navbar-form navbar-nav navbar-left">
           <li>
             <div class="form-group">
-              <private-key-select ng-model='privateKey'></private-key-select>
+              <private-key-select ng-model='data.selectedPrivateKey'></private-key-select>
             </div>
           </li>
       </ul>
@@ -48,7 +48,6 @@
               <h2>Encrypt</h2>
               <textarea ng-model='plaintext'></textarea>
               <input type='checkbox' ng-model='sign' /> Sign Message
-              <private-key-select ng-show='sign' ng-model='privateKey'></private-key-select>
               <button ng-click="encrypt()">Encrypt</button>
               <textarea ng-model='encrypted'></textarea>
             </div>
@@ -56,7 +55,6 @@
           <tab heading="Decrypt">
             <div ng-controller='DecryptMessageController'>
               <h2>Decrypt a Message</h2>
-              <private-key-select ng-model='privateKey'></private-key-select>
               <textarea ng-model='encryptedMessage'></textarea>
               <input type='checkbox' ng-model='verify' /> Verify Message
               <button ng-click="decryptMessage()">Decrypt</button>
@@ -69,7 +67,6 @@
           <tab heading="Sign">
             <div ng-controller='SignCleartextMessageController'>
               <h2>Sign a Cleartext Message</h2>
-              <private-key-select ng-model='privateKey'></private-key-select>
               <textarea ng-model='plaintext'></textarea>
               <textarea ng-model='signed'></textarea>
               <button ng-click="signMessage()">Sign</button>

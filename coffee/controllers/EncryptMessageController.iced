@@ -16,7 +16,7 @@
     privateKey = null
 
     if $scope.sign
-      privateKey = $scope.privateKey
+      privateKey = $rootScope.data.selectedPrivateKey
       if not privateKey.isDecrypted
         modalInstance = $modal.open {
           templateUrl: 'passwordModalTemplate.html'
