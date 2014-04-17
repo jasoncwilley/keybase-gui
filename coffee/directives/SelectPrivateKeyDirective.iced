@@ -14,7 +14,7 @@
 
       for privateKey in $scope.privateKeys
         privateKey.primaryKey.optimizedFingerprint =
-          privateKey.primaryKey.fingerprint.match(/.{1,4}/g).join(" ")
+          privateKey.primaryKey.fingerprint.match(/.{1,4}/g).slice(6).join(" ")
 
       unless $scope.selectedPrivateKey
         $scope.selectedPrivateKey = $scope.privateKeys[0]
