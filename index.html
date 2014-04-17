@@ -31,14 +31,15 @@
           <h2>Friends</h2>
           <ul>
             <li ng-repeat="user in friends track by $index">
-              <a href="#" ng-click='selectUser(user)' data-selected="{{selectedFriend == user}}">{{ user.basics.username }}</a>
+              <a href="#" ng-click='selectUser(user)'
+                data-selected="{{selectedFriend == user}}">{{ user.basics.username }}</a>
             </li>
           </ul>
         </div>
         <div ng-controller='UserSearchController'>
           <h2>Search</h2>
           <input type='text' ng-model="username" typeahead="suggestions for suggestions in getSuggestions($viewValue) | filter:$viewValue" typeahead-loading='loadingSuggestions' />
-          <button ng-click="lookup()">Search</button>
+          <button class="btn" ng-click="lookup()">Search</button>
         </div>
       </div>
       <div class='col-md-10 col-xs-8'>
@@ -48,7 +49,7 @@
               <h2>Encrypt</h2>
               <textarea ng-model='plaintext'></textarea>
               <input type='checkbox' ng-model='sign' /> Sign Message
-              <button ng-click="encrypt()">Encrypt</button>
+              <button class="btn" ng-click="encrypt()">Encrypt</button>
               <textarea ng-model='encrypted'></textarea>
             </div>
           </tab>
@@ -57,7 +58,7 @@
               <h2>Decrypt a Message</h2>
               <textarea ng-model='encryptedMessage'></textarea>
               <input type='checkbox' ng-model='verify' /> Verify Message
-              <button ng-click="decryptMessage()">Decrypt</button>
+              <button class="btn" ng-click="decryptMessage()">Decrypt</button>
               <div ng-show="signers.length">
                 This message was signed by:
                 <ul><li ng-repeat="key in signers">{{ key.users[0].userId.userid }}</li></ul>
@@ -69,14 +70,14 @@
               <h2>Sign a Cleartext Message</h2>
               <textarea ng-model='plaintext'></textarea>
               <textarea ng-model='signed'></textarea>
-              <button ng-click="signMessage()">Sign</button>
+              <button class="btn" ng-click="signMessage()">Sign</button>
             </div>
           </tab>
           <tab heading="Verify">
             <div ng-controller='VerifyCleartextMessageController'>
               <h2>Verify a cleartext signed message</h2>
               <textarea ng-model='signedMessage'></textarea>
-              <button ng-click="verifyMessage()">Verify</button>
+              <button class="btn" ng-click="verifyMessage()">Verify</button>
               <div ng-show="signers.length">
                 This message was signed by:
                 <ul><li ng-repeat="key in signers">{{ key.users[0].userId.userid }}</li></ul>
@@ -93,14 +94,14 @@
   <div ng-controller='ImportPrivateKeyController'>
     <h2>Import Your Privatekey</h2>
     <textarea ng-model='key'></textarea>
-    <button ng-click="importKey()">Import</button>
+    <button class="btn" ng-click="importKey()">Import</button>
   </div>
 
   <div ng-controller='LoginController'>
     <h2>Login</h2>
     <input ng-model="username" />
     <input type="password" ng-model="password" />
-    <button ng-click="login()">Log In</button>
+    <button class="btn" ng-click="login()">Log In</button>
   </div>
 
 
