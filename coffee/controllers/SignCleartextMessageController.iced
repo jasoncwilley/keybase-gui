@@ -1,10 +1,16 @@
-@keybaseGui.controller 'SignCleartextMessageController', ["$scope", "openPGP",
-($scope, openPgp) ->
+@keybaseGui.controller 'SignCleartextMessageController', ["$scope",
+"openPGP", '$modal',
+($scope, openPgp, $modal) ->
 
   $scope.signMessage = () ->
     privateKey = $scope.privateKey
     if not privateKey.isDecrypted
-      privateKey.decrypt($scope.password)
+      modalInstance = $modal.open {
+        templateUrl: 'passwordModalTemplate.html'
+        controller: 'PasswordModalController'
+      }
+      await modalInstance.result.then defer password
+      privateKey.decrypt(password)
     message = ($scope.plaintext)
     await openPgp.signCleartextMessage privateKey, message, defer signed
     $scope.signed = signed

@@ -1,5 +1,6 @@
 @keybaseGui.controller 'EncryptMessageController', ["$scope", "$rootScope",
-"openPGP", "keybaseApi", ($scope, $rootScope, openPgp, keybaseApi) ->
+"openPGP", "keybaseApi", '$modal',
+($scope, $rootScope, openPgp, keybaseApi, $modal) ->
   $scope.sign = false
 
   $scope.encrypt = ->
@@ -17,11 +18,16 @@
     if $scope.sign
       privateKey = $scope.privateKey
       if not privateKey.isDecrypted
-        privateKey.decrypt($scope.password)
+        modalInstance = $modal.open {
+          templateUrl: 'passwordModalTemplate.html'
+          controller: 'PasswordModalController'
+        }
+        await modalInstance.result.then defer password
+        privateKey.decrypt(password)
 
     await openPgp.encryptMessage primaryKey, privateKey,
     plainText, defer encrypted
-    
+
     $scope.$apply ->
       $scope.encrypted = encrypted
   ]

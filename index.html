@@ -74,6 +74,23 @@
     </div>
   </div>
 
+  <script type="text/ng-template" id="passwordModalTemplate.html">
+    <div class="modal-header">
+        <h3>Unlock private key</h3>
+    </div>
+    <div class="modal-body">
+    <p>
+      To use this private key, it first has to get decrypted. For this, your password is required.
+      Nothing will be saved, everythings only in the RAM.
+    </p>
+    <input type='password' ng-model='user.password' />
+    </div>
+    <div class="modal-footer">
+    <button class="btn btn-primary" ng-click="ok()">OK</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+  </script>
+
   <script>
     var Gaze = require('gaze').Gaze;
     var gaze = new Gaze(['index.html', 'build/**/*']);
