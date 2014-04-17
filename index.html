@@ -6,7 +6,94 @@
     <script src="build/js/app.js"></script>
 </head>
 <body>
-  <h1>Keybase Gui!</h1>
+  <nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+
+      </div>
+      <ul class="nav navbar-form navbar-nav navbar-left">
+          <li>
+            <div class="form-group">
+              <private-key-select ng-model='privateKey'></private-key-select>
+            </div>
+          </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Import Privatekey from Keybase</a></li>
+        <li><a href="#">Import Privatekey from String</a></li>
+      </ul>
+    </div>
+  </nav>
+  <div class='container'>
+    <div class='row'>
+      <div class='col-md-2 col-s-2'>
+        <div ng-controller='FriendListController'>
+          <h2>Friends</h2>
+          <ul>
+            <li ng-repeat="user in friends track by $index">
+              <a href="#" ng-click='selectUser(user)' data-selected="{{selectedFriend == user}}">{{ user.basics.username }}</a>
+            </li>
+          </ul>
+        </div>
+        <div ng-controller='UserSearchController'>
+          <h2>Search</h2>
+          <input type='text' ng-model="username" typeahead="suggestions for suggestions in getSuggestions($viewValue) | filter:$viewValue" typeahead-loading='loadingSuggestions' />
+          <button ng-click="lookup()">Search</button>
+        </div>
+      </div>
+      <div class='col-md-10 col-s-10'>
+        <tabset justified='true'>
+          <tab heading="Encrypt">
+            <div ng-controller='EncryptMessageController'>
+              <h2>Encrypt</h2>
+              <textarea ng-model='plaintext'></textarea>
+              <input type='checkbox' ng-model='sign' /> Sign Message
+              <private-key-select ng-show='sign' ng-model='privateKey'></private-key-select>
+              <button ng-click="encrypt()">Encrypt</button>
+              <textarea ng-model='encrypted'></textarea>
+            </div>
+          </tab>
+          <tab heading="Decrypt">
+            <div ng-controller='DecryptMessageController'>
+              <h2>Decrypt a Message</h2>
+              <private-key-select ng-model='privateKey'></private-key-select>
+              <textarea ng-model='encryptedMessage'></textarea>
+              <input type="password" ng-model='password' />
+              <button ng-click="decryptMessage()">Decrypt</button>
+            </div>
+          </tab>
+          <tab heading="Sign">
+            <div ng-controller='SignCleartextMessageController'>
+              <h2>Sign a Cleartext Message</h2>
+              <private-key-select ng-model='privateKey'></private-key-select>
+              <textarea ng-model='plaintext'></textarea>
+              <textarea ng-model='signed'></textarea>
+              <button ng-click="signMessage()">Sign</button>
+            </div>
+          </tab>
+          <tab heading="Verify">
+            <div ng-controller='VerifyCleartextMessageController'>
+              <h2>Verify a cleartext signed message</h2>
+              <textarea ng-model='signedMessage'></textarea>
+              <button ng-click="verifyMessage()">Verify</button>
+              <div ng-show="signers.length">
+                This message was signed by:
+                <ul><li ng-repeat="key in signers">{{ key.users[0].userId.userid }}</li></ul>
+              </div>
+            </div>
+          </tab>
+        </tabset>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div ng-controller='ImportPrivateKeyController'>
+    <h2>Import Your Privatekey</h2>
+    <textarea ng-model='key'></textarea>
+    <button ng-click="importKey()">Import</button>
+  </div>
 
   <div ng-controller='LoginController'>
     <h2>Login</h2>
@@ -15,64 +102,6 @@
     <button ng-click="login()">Log In</button>
   </div>
 
-  <div ng-controller='UserSearchController'>
-    <h2>Search</h2>
-    <input type='text' ng-model="username" typeahead="suggestions for suggestions in getSuggestions($viewValue) | filter:$viewValue" typeahead-loading='loadingSuggestions' />
-    <button ng-click="lookup()">Search</button>
-    {{user.profile.full_name}}
-  </div>
-
-  <div ng-controller='FriendListController'>
-    <h2>Friends</h2>
-    <ul>
-      <li ng-repeat="user in friends track by $index">
-        <a href="#" ng-click='selectUser(user)' data-selected="{{selectedFriend == user}}">{{ user.basics.username }}</a>
-      </li>
-    </ul>
-  </div>
-
-  <div ng-controller='EncryptMessageController'>
-    <h2>Encrypt</h2>
-    <textarea ng-model='plaintext'></textarea>
-    <input type='checkbox' ng-model='sign' /> Sign Message
-    <private-key-select ng-show='sign' ng-model='privateKey'></private-key-select>
-    <input type='password' ng-show='sign' ng-model='password' />
-    <button ng-click="encrypt()">Encrypt</button>
-    <textarea ng-model='encrypted'></textarea>
-  </div>
-
-  <div ng-controller='ImportPrivateKeyController'>
-    <h2>Import Your Privatekey</h2>
-    <textarea ng-model='key'></textarea>
-    <button ng-click="importKey()">Import</button>
-  </div>
-
-  <div ng-controller='DecryptMessageController'>
-    <h2>Decrypt a Message</h2>
-    <private-key-select ng-model='privateKey'></private-key-select>
-    <textarea ng-model='encryptedMessage'></textarea>
-    <input type="password" ng-model='password' />
-    <button ng-click="decryptMessage()">Decrypt</button>
-  </div>
-
-  <div ng-controller='SignCleartextMessageController'>
-    <h2>Sign a Cleartext Message</h2>
-    <private-key-select ng-model='privateKey'></private-key-select>
-    <textarea ng-model='plaintext'></textarea>
-    <input type="password" ng-model='password' />
-    <textarea ng-model='signed'></textarea>
-    <button ng-click="signMessage()">Sign</button>
-  </div>
-
-  <div ng-controller='VerifyCleartextMessageController'>
-    <h2>Verify a cleartext signed message</h2>
-    <textarea ng-model='signedMessage'></textarea>
-    <button ng-click="verifyMessage()">Verify</button>
-    <div ng-show="signers.length">
-      This message was signed by:
-      <ul><li ng-repeat="key in signers">{{ key.users[0].userId.userid }}</li></ul>
-    </div>
-  </div>
 
   <script type="text/ng-template" id="passwordModalTemplate.html">
     <div class="modal-header">
