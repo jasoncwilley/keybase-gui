@@ -58,8 +58,12 @@
               <h2>Decrypt a Message</h2>
               <private-key-select ng-model='privateKey'></private-key-select>
               <textarea ng-model='encryptedMessage'></textarea>
-              <input type="password" ng-model='password' />
+              <input type='checkbox' ng-model='verify' /> Verify Message
               <button ng-click="decryptMessage()">Decrypt</button>
+              <div ng-show="signers.length">
+                This message was signed by:
+                <ul><li ng-repeat="key in signers">{{ key.users[0].userId.userid }}</li></ul>
+              </div>
             </div>
           </tab>
           <tab heading="Sign">
