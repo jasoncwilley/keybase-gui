@@ -28,7 +28,33 @@
     <div class='row'>
       <div class='col-md-2 col-xs-4'>
         <div ng-controller='FriendListController'>
-          <h2>Friends</h2>
+          <h2>
+            Friends
+            <div class="pull-right">
+              <script type="text/ng-template" id="addUserTemplate.html">
+                <div class="popover" ng-controller='UserSearchController'>
+                  <div class="arrow"></div>
+                  <h3 class="popover-title">Add a Friend</h3>
+                  <div class="popover-content">
+                    <form name="popoverForm">
+                      <input type='text' ng-model="username"
+                      typeahead="suggestions for suggestions in getSuggestions($viewValue) | filter:$viewValue"
+                      typeahead-loading='loadingSuggestions' /> <br />
+                      <button class="btn" ng-click="lookup()">Add</button>
+                    </form>
+                  </div>
+                </div>
+              </script>
+              <button
+              data-animation="am-flip-x"
+              bs-popover
+              data-template="addUserTemplate.html"
+              class="btn btn-primary">
+                <span class="glyphicon glyphicon-white glyphicon-plus-sign"></span>
+              </button>
+            </div>
+          </h2>
+
           <ul class="nav nav-pills nav-stacked">
             <li ng-class="{active: selectedFriend == user}"
                 ng-repeat="user in friends track by $index">
@@ -36,11 +62,6 @@
                 data-selected="{{selectedFriend == user}}">{{ user.basics.username }}</a>
             </li>
           </ul>
-        </div>
-        <div ng-controller='UserSearchController'>
-          <h2>Search</h2>
-          <input type='text' ng-model="username" typeahead="suggestions for suggestions in getSuggestions($viewValue) | filter:$viewValue" typeahead-loading='loadingSuggestions' />
-          <button class="btn" ng-click="lookup()">Search</button>
         </div>
       </div>
       <div class='col-md-10 col-xs-8'>
@@ -122,7 +143,6 @@
     <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
     </div>
   </script>
-
   <script>
     var Gaze = require('gaze').Gaze;
     var gaze = new Gaze(['index.html', 'build/**/*']);

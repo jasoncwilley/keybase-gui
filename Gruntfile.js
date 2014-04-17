@@ -37,6 +37,8 @@ module.exports = function (grunt) {
               'bower_components/bootstrap/dist/js/bootstrap.js',
               'bower_components/angular-cookies/angular-cookies.js',
               'bower_components/angularLocalStorage/src/angularLocalStorage.js',
+              'bower_components/angular-strap/dist/angular-strap.js',
+              'bower_components/angular-strap/dist/angular-strap.tpl.js',
               'bower_components/angular-bootstrap/ui-bootstrap.js',
               'bower_components/angular-bootstrap/ui-bootstrap-tpls.js'],
         dest: 'build/js/libs.js',
