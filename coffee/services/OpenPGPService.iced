@@ -74,5 +74,8 @@
         msg = openPgp.cleartext.readArmored(msg)
         signingKeyIds = msg.getSigningKeyIds()
         cb signingKeyIds
+
+    hexstrdump: (str) ->
+      openPgp.util.hexstrdump str
   }
 ]

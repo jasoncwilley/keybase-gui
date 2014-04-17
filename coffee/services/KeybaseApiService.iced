@@ -79,6 +79,15 @@
 
       cb results
 
+    lookupKey: (keyId, cb) ->
+      url = "#{baseUrl}/key/fetch.json?pgp_key_ids=#{keyId}&ops=4"
+
+      await $http.get(url).then defer result
+
+      key = result.data.keys[0]
+
+      cb key
+
     logout: (cb) ->
       if !!$http.defaults.headers.common.Cookie
         cb new Error("The user wasn't signed in!")
