@@ -1,2 +1,2 @@
 @keybaseGui = angular.module 'keybaseGui',
-['angularLocalStorage', 'autocomplete']
+['angularLocalStorage', 'ui.bootstrap']

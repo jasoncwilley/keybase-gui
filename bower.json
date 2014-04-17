@@ -19,6 +19,6 @@
     "angular": "~1.2.16",
     "jquery": "~2.1.0",
     "angularLocalStorage": "~0.1.7",
-    "allmighty-autocomplete": "*"
+    "angular-bootstrap": "~0.10.0"
   }
 }

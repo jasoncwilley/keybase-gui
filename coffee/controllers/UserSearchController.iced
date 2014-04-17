@@ -18,6 +18,18 @@
     typedString = typed
     $timeout updateSuggestions, 250
 
+  $scope.getSuggestions = (typed) ->
+    keybaseApi.autocompletePromise(typed).then (res) ->
+      completions = res.data.completions
+      completions.sort (a, b) ->
+        b.totalScore - a.totalScore
+
+      results = []
+
+      for value in completions
+        results.push value.components.username.val
+      return results
+
   $scope.lookup = ->
     await keybaseApi.lookup $scope.username, defer err, user
 

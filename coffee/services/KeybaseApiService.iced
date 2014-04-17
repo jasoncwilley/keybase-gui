@@ -80,6 +80,10 @@
 
       cb results
 
+    autocompletePromise: (query) ->
+      url = "#{baseUrl}/user/autocomplete.json?q=#{query}"
+      $http.get url
+
     lookupKey: (keyId, cb) ->
       url = "#{baseUrl}/key/fetch.json?pgp_key_ids=#{keyId}&ops=4"
 

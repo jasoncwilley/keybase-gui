@@ -37,13 +37,13 @@ module.exports = function (grunt) {
               'bower_components/bootstrap/dist/js/bootstrap.js',
               'bower_components/angular-cookies/angular-cookies.js',
               'bower_components/angularLocalStorage/src/angularLocalStorage.js',
-              'bower_components/allmighty-autocomplete/script/autocomplete.js'],
+              'bower_components/angular-bootstrap/ui-bootstrap.js',
+              'bower_components/angular-bootstrap/ui-bootstrap-tpls.js'],
         dest: 'build/js/libs.js',
       },
       cssLibs: {
         src: ['bower_components/bootstrap/dist/css/bootstrap.css',
-              'bower_components/bootstrap/dist/css/bootstrap-theme.css',
-              'bower_components/allmighty-autocomplete/style/autocomplete.css'],
+              'bower_components/bootstrap/dist/css/bootstrap-theme.css'],
         dest: 'build/css/bootstrap.css'
       }
     },

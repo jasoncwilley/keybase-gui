@@ -17,7 +17,7 @@
 
   <div ng-controller='UserSearchController'>
     <h2>Search</h2>
-    <autocomplete ng-model="username" data="suggestions" on-type="queueUpdateSuggestions"></autocomplete>
+    <input type='text' ng-model="username" typeahead="suggestions for suggestions in getSuggestions($viewValue) | filter:$viewValue" typeahead-loading='loadingSuggestions' />
     <button ng-click="lookup()">Search</button>
     {{user.profile.full_name}}
   </div>
