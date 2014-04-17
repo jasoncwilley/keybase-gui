@@ -9,7 +9,8 @@
     $scope.signers = $scope.signers.concat storeResolvedKeys
 
     await keybaseApi.resolveKeyIds storeUnresolvedKeys, defer kbResolvedKeys, kbUnresolvedKeys
-    $scope.signers = $scope.signers.concat kbResolvedKeys
 
+    $scope.signers = $scope.signers.concat kbResolvedKeys
+    $scope.$apply()
     # TODO: Search on SKS Keyservers (MIT I'd say)
 ]

@@ -79,15 +79,15 @@
       process.nextTick () ->
         unresolvedKeys = []
         resolvedKeys = []
-        angular.forEach keyIds, (keyId, index2) ->
+        for keyId in keyIds
           keyFound = false
-          angular.forEach keyring.publicKeys.keys, (publicKey, index) ->
+          for publicKey in keyring.publicKeys.keys
             if publicKey.primaryKey.keyid.bytes == keyId.bytes
               resolvedKeys.push publicKey
               keyFound = true
 
           unless keyFound
-            unresolvedKeyIds.push keyId
+            unresolvedKeys.push keyId
 
         cb resolvedKeys, unresolvedKeys
 

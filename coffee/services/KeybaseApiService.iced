@@ -1,4 +1,4 @@
-@keybaseGui.factory 'keybaseApi', ['$http', 'openPGP' ($http, openPgp) ->
+@keybaseGui.factory 'keybaseApi', ['$http', 'openPGP', ($http, openPgp) ->
   baseUrl = "https://keybase.io/_/api/1.0"
   openPgp.init()
 
@@ -92,19 +92,22 @@
     resolveKeyIds: (keyIds, cb) ->
       notResolvedKeys = []
       resolvedKeys = []
-      angular.forEach keyIds, (keyId, index) ->
-        url = "#{baseUrl}/key/fetch.json?pgp_key_ids=#{keyId}&ops=4"
+      for keyId in keyIds
+        keyIdOptimized = openPgp.hexstrdump keyId.bytes
+        url = "#{baseUrl}/key/fetch.json?pgp_key_ids=#{keyIdOptimized}&ops=4"
 
         await $http.get(url).then defer result
 
         key = result.data.keys[0]
 
         await openPgp.readPublicKey key.bundle, defer foundKey
+
         if foundKey
           foundKey = foundKey.keys[0]
           resolvedKeys.push foundKey
         else
           notResolvedKeys.push keyId
+
       cb resolvedKeys, notResolvedKeys
 
     logout: (cb) ->
