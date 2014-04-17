@@ -20,5 +20,5 @@ grunt dev
 And in a new Shell-Session:
 ```
 npm start
-´```
+```
 The webpage should reload itself automatically.
