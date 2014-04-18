@@ -11,4 +11,12 @@
 
     await $modalInstance.result.then defer key
 
+  $scope.openLoginModal = () ->
+    $modalInstance = $modal.open {
+      templateUrl: "loginModalTemplate.html"
+      controller: "LoginModalController"
+    }
+
+    await $modalInstance.result.then defer key
+
 ]

@@ -19,7 +19,7 @@
           </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Import Privatekey from Keybase</a></li>
+        <li><a href="#" ng-click="openLoginModal()">Import Privatekey from Keybase</a></li>
         <li><a href="#" ng-click="openImportStringModal()">Import Privatekey from String</a></li>
       </ul>
     </div>
@@ -113,11 +113,16 @@
 
 
   <script type="text/ng-template" id="loginModalTemplate.html">
-    <div ng-controller='LoginController'>
-      <h2>Login</h2>
+    <div class='modal-header'>
+      <h3>Login</h3>
+    </div>
+    <div class='modal-body'>
       <input ng-model="username" />
       <input type="password" ng-model="password" />
-      <button class="btn" ng-click="login()">Log In</button>
+    </div>
+    <div class='modal-footer'>
+      <button class="btn btn-primary" ng-click="login()">Import</button>
+      <button class='btn btn-warning' ng-click="cancel()">Cancel</button>
     </div>
   </script>
 
@@ -146,8 +151,8 @@
     <input type='password' ng-model='user.password' />
     </div>
     <div class="modal-footer">
-    <button class="btn btn-primary" ng-click="ok()">OK</button>
-    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+      <button class="btn btn-primary" ng-click="ok()">OK</button>
+      <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
     </div>
   </script>
   <script>
