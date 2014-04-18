@@ -75,7 +75,7 @@
                     <textarea ng-model='data.plaintext'></textarea>
                   </div>
                   <div class="button-area pull-right">
-                    <input type='checkbox' ng-model='sign' /> Sign Message
+                    <input type='checkbox' ng-model='data.sign' /> Sign Message
                     <button class="btn" ng-click="encrypt()">Encrypt</button>
                   </div>
                 </div>
@@ -92,14 +92,29 @@
           </tab>
           <tab heading="Decrypt">
             <div ng-controller='DecryptMessageController'>
-              <h2>Decrypt a Message</h2>
-              <textarea ng-model='encryptedMessage'></textarea>
-              <input type='checkbox' ng-model='verify' /> Verify Message
-              <button class="btn" ng-click="decryptMessage()">Decrypt</button>
-              <div ng-show="signers.length">
-                This message was signed by:
-                <ul><li ng-repeat="key in signers">{{ key.users[0].userId.userid }}</li></ul>
-              </div>
+              <ng-switch on="mode">
+                <div ng-switch-default class="slide">
+                  <div class="input-area">
+                    <textarea ng-model='data.encryptedMessage'></textarea>
+                  </div>
+                  <div class="button-area pull-right">
+                    <input type='checkbox' ng-model='data.verify' /> Verify Message
+                    <button class="btn" ng-click="decryptMessage()">Decrypt</button>
+                  </div>
+                </div>
+                <div ng-switch-when="plaintext" class="slide">
+                  <div class="output-area">
+                    <textarea ng-model='data.decryptedMessage'></textarea>
+                    <div ng-show="data.signers.length">
+                      This message was signed by:
+                      <ul><li ng-repeat="key in data.signers">{{ key.users[0].userId.userid }}</li></ul>
+                    </div>
+                  </div>
+                  <div class="button-area pull-right">
+                    <button class="btn" ng-click="back()">Back</button>
+                  </div>
+                </div>
+              </ng-switch>
             </div>
           </tab>
           <tab heading="Sign">

@@ -1,6 +1,15 @@
 @keybaseGui.controller 'DecryptMessageController', ["$scope", "$rootScope",
- "openPGP", '$modal', "keybaseApi",
- ($scope, $rootScope, openPgp, $modal, keybaseApi) ->
+"openPGP", '$modal', "keybaseApi",
+($scope, $rootScope, openPgp, $modal, keybaseApi) ->
+
+  $scope.modes = ["enc", "plaintext"]
+  $scope.mode = $scope.modes[0]
+  
+  $scope.data = {}
+  $scope.data.encryptedMessage = ''
+  $scope.data.decryptedMessage = ''
+  $scope.data.signers = []
+  $scope.data.verify = false
 
   $scope.decryptMessage = ->
     privateKey = $rootScope.data.selectedPrivateKey
@@ -13,24 +22,30 @@
       await modalInstance.result.then defer password
       privateKey.decrypt(password)
 
-    message = $scope.encryptedMessage
+    message = $scope.data.encryptedMessage
     await openPgp.decryptMessage privateKey, message, defer decrypted, armored
-    alert decrypted
+    $scope.data.decryptedMessage = decrypted
     armored = armored.decrypt privateKey
-    if $scope.verify
+    $scope.mode = $scope.modes[1]
+    
+    if $scope.data.verify
       await openPgp.getSigningKeyIdsArmoredMessage armored, defer keyIds
-      $scope.signers = []
+      $scope.data.signers = []
 
       await openPgp.resolveKeyIdsFromStorage keyIds,
       defer storeResolvedKeys, storeUnresolvedKeys
 
-      $scope.signers = $scope.signers.concat storeResolvedKeys
+      $scope.data.signers = $scope.data.signers.concat storeResolvedKeys
 
       await keybaseApi.resolveKeyIds storeUnresolvedKeys,
       defer kbResolvedKeys, kbUnresolvedKeys
 
-      $scope.signers = $scope.signers.concat kbResolvedKeys
+      $scope.data.signers = $scope.data.signers.concat kbResolvedKeys
+      
       $scope.$apply()
 
-    #TODO: fetch missing keyIds from MIT server
+      #TODO: fetch missing keyIds from MIT server
+    
+  $scope.back = ->
+    $scope.mode = $scope.modes[0]
 ]

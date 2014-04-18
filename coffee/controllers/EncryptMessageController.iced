@@ -20,7 +20,7 @@
 
     privateKey = null
 
-    if $scope.sign
+    if $scope.data.sign
       privateKey = $rootScope.data.selectedPrivateKey
       if not privateKey.isDecrypted
         modalInstance = $modal.open {
