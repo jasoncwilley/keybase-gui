@@ -1,0 +1,11 @@
+.input-area, .output-area {
+  width: 100%;  
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.input-area textarea,
+.output-area textarea {
+  width: 100%;
+  height: 250px;
+}

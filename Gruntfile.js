@@ -23,7 +23,7 @@ module.exports = function (grunt) {
           style: 'expanded'
         },
         files: {
-          'build/css/app.css': 'sass/**/*.scss'
+          'build/css/app.css': 'build/sass/app.scss'
         }
       }
     },
@@ -49,6 +49,10 @@ module.exports = function (grunt) {
               'bower_components/bootstrap/dist/css/bootstrap-theme.css',
               'bower_components/animate.css/animate.css'],
         dest: 'build/css/bootstrap.css'
+      },
+      sassStyles: {
+        src: ['sass/**/*.scss'],
+        dest: 'build/sass/app.scss'
       }
     },
     copy: {
@@ -109,7 +113,7 @@ module.exports = function (grunt) {
   grunt.registerTask('build-js-libs', ['concat:jsLibs']);
   grunt.registerTask('build-js-app', ['coffeelint', 'coffee']);
   grunt.registerTask('build-js', ['build-js-libs', 'build-js-app']);
-  grunt.registerTask('build-css', ['sass', 'build-css-libs']);
+  grunt.registerTask('build-css', ['concat:sassStyles', 'sass', 'build-css-libs']);
   grunt.registerTask('build-css-libs', ['concat:cssLibs']);
   grunt.registerTask('build-fonts', ['copy:bootstrapFonts']);
   grunt.registerTask('build-images', ['copy:images']);

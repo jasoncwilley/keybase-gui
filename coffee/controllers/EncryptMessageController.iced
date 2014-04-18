@@ -36,4 +36,8 @@
     $scope.$apply ->
       $scope.encrypted = encrypted
       $scope.mode = $scope.modes[1]
-  ]
+  
+  
+  $scope.back = ->
+      $scope.mode = $scope.modes[0]
+]

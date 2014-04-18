@@ -71,14 +71,23 @@
             <div ng-controller='EncryptMessageController'>
               <ng-switch on="mode">
                 <div ng-switch-default class="slide">
-                  <textarea ng-model='data.plaintext'></textarea>
-                  <input type='checkbox' ng-model='sign' /> Sign Message
+                  <div class='input-area'>
+                    <textarea ng-model='data.plaintext'></textarea>
+                  </div>
+                  <div class="button-area pull-right">
+                    <input type='checkbox' ng-model='sign' /> Sign Message
+                    <button class="btn" ng-click="encrypt()">Encrypt</button>
+                  </div>
                 </div>
                 <div ng-switch-when="encrypted" class="slide">
-                  <textarea ng-model='encrypted'></textarea>
+                  <div class="output-area">
+                    <textarea ng-model='encrypted'></textarea>
+                  </div>
+                  <div class="button-area pull-right">
+                    <button class="btn" ng-click="back()">Back</button>
+                  </div>
                 </div>
               </ng-switch>
-              <button class="btn" ng-click="encrypt()">Encrypt</button>
             </div>
           </tab>
           <tab heading="Decrypt">
