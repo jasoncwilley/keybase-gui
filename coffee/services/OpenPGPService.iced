@@ -81,6 +81,11 @@
         msg = openPgp.cleartext.readArmored(msg)
         signingKeyIds = msg.getSigningKeyIds()
         cb signingKeyIds
+        
+    getCleartextMessageText: (msg, cb) ->
+      process.nextTick () ->
+        msg = openPgp.cleartext.readArmored msg
+        cb msg.getText()
 
     resolveKeyIdsFromStorage: (keyIds, cb) ->
       process.nextTick () ->

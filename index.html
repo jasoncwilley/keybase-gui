@@ -27,7 +27,7 @@
   </nav>
   <div class='container-fluid'>
     <div class='row'>
-      <div class='col-md-2 col-xs-4'>
+      <div class='col-md-3 col-xs-4'>
         <div ng-controller='FriendListController'>
           <h2>
             Friends
@@ -65,7 +65,7 @@
           </ul>
         </div>
       </div>
-      <div class='col-md-10 col-xs-8'>
+      <div class='col-md-9 col-xs-8'>
         <tabset justified='true'>
           <tab heading="Encrypt">
             <div ng-controller='EncryptMessageController'>
@@ -119,21 +119,50 @@
           </tab>
           <tab heading="Sign">
             <div ng-controller='SignCleartextMessageController'>
-              <h2>Sign a Cleartext Message</h2>
-              <textarea ng-model='plaintext'></textarea>
-              <textarea ng-model='signed'></textarea>
-              <button class="btn" ng-click="signMessage()">Sign</button>
+              <ng-switch on="mode">
+                <div ng-switch-default class="slide">
+                  <div class="input-area">
+                    <textarea ng-model='data.plaintext'></textarea>
+                  </div>
+                  <div class="button-area pull-right">
+                    <button class="btn" ng-click="signMessage()">Sign</button>
+                  </div>
+                </div>
+                <div ng-switch-when="signed" class="slide">
+                  <div class="output-area">
+                    <textarea ng-model='data.signed'></textarea>
+                  </div>
+                  <div class="button-area pull-right">
+                    <button class="btn" ng-click="back()">Back</button>
+                  </div>
+                </div>
+              </ng-switch>
             </div>
           </tab>
           <tab heading="Verify">
             <div ng-controller='VerifyCleartextMessageController'>
-              <h2>Verify a cleartext signed message</h2>
-              <textarea ng-model='signedMessage'></textarea>
-              <button class="btn" ng-click="verifyMessage()">Verify</button>
-              <div ng-show="signers.length">
-                This message was signed by:
-                <ul><li ng-repeat="key in signers">{{ key.users[0].userId.userid }}</li></ul>
-              </div>
+              <ng-switch on="mode">
+                <div ng-switch-default class="slide">
+                  <div class="input-area">
+                    <textarea ng-model='data.signedMessage'></textarea>
+                  </div>
+                  <div class="button-area pull-right">
+                    <button class="btn" ng-click="verifyMessage()">Verify</button>
+                  </div>
+                </div>
+                <div ng-switch-when="verified">
+                  <div class="output-area">
+                    <textarea ng-model="data.verifiedMessage"></textarea>
+                    <div ng-show="data.signers.length">
+                      This message was signed by:
+                      <ul><li ng-repeat="key in data.signers">{{ key.users[0].userId.userid }}</li></ul>
+                    </div>
+                  </div>
+                  <div class="button-area pull-right">
+                    <button class="btn" ng-click="back()">Back</button>
+                  </div>
+                </div>
+              </ng-switch>
             </div>
           </tab>
         </tabset>
