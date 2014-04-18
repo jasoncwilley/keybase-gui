@@ -34,6 +34,7 @@ module.exports = function (grunt) {
       jsLibs: {
         src: ['bower_components/jquery/dist/jquery.js',
               'bower_components/angular/angular.js',
+              'bower_components/angular-animate/angular-animate.js',
               'bower_components/bootstrap/dist/js/bootstrap.js',
               'bower_components/angular-cookies/angular-cookies.js',
               'bower_components/angularLocalStorage/src/angularLocalStorage.js',
@@ -45,7 +46,8 @@ module.exports = function (grunt) {
       },
       cssLibs: {
         src: ['bower_components/bootstrap/dist/css/bootstrap.css',
-              'bower_components/bootstrap/dist/css/bootstrap-theme.css'],
+              'bower_components/bootstrap/dist/css/bootstrap-theme.css',
+              'bower_components/animate.css/animate.css'],
         dest: 'build/css/bootstrap.css'
       }
     },
@@ -73,7 +75,7 @@ module.exports = function (grunt) {
         tasks: ['build-js-app']
       },
       css: {
-        files: ['css/**/*.css'],
+        files: ['sass/**/*.scss'],
         tasks: ['build-css']
       }
     },

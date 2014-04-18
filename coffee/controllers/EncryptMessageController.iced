@@ -1,12 +1,17 @@
 @keybaseGui.controller 'EncryptMessageController', ["$scope", "$rootScope",
 "openPGP", "keybaseApi", '$modal',
 ($scope, $rootScope, openPgp, keybaseApi, $modal) ->
+
   $scope.sign = false
+  $scope.modes = ["plain", "encrypted"]
+  $scope.mode = $scope.modes[0]
+  $scope.data = {}
+  $scope.data.plaintext = ""
 
   $scope.encrypt = ->
     openPgp.init()
 
-    plainText = $scope.plaintext
+    plainText = $scope.data.plaintext
 
     primaryKeyString = $rootScope.selectedFriend.public_keys.primary.bundle
     await openPgp.readPublicKey(primaryKeyString, defer primaryKey)
@@ -30,4 +35,5 @@
 
     $scope.$apply ->
       $scope.encrypted = encrypted
+      $scope.mode = $scope.modes[1]
   ]

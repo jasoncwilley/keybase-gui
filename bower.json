@@ -20,6 +20,8 @@
     "jquery": "~2.1.0",
     "angularLocalStorage": "~0.1.7",
     "angular-bootstrap": "~0.10.0",
-    "angular-strap": "~2.0.1"
+    "angular-strap": "~2.0.1",
+    "angular-animate": "~1.2.16",
+    "animate.css": "~3.1.0"
   }
 }

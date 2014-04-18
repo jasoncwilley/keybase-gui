@@ -2,6 +2,7 @@
 <head>
     <title>Keybase GUI</title>
     <link rel="stylesheet" type="text/css" href="build/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="build/css/app.css" />
     <script src="build/js/libs.js"></script>
     <script src="build/js/app.js"></script>
 </head>
@@ -68,11 +69,16 @@
         <tabset justified='true'>
           <tab heading="Encrypt">
             <div ng-controller='EncryptMessageController'>
-              <h2>Encrypt</h2>
-              <textarea ng-model='plaintext'></textarea>
-              <input type='checkbox' ng-model='sign' /> Sign Message
+              <ng-switch on="mode">
+                <div ng-switch-default class="slide">
+                  <textarea ng-model='data.plaintext'></textarea>
+                  <input type='checkbox' ng-model='sign' /> Sign Message
+                </div>
+                <div ng-switch-when="encrypted" class="slide">
+                  <textarea ng-model='encrypted'></textarea>
+                </div>
+              </ng-switch>
               <button class="btn" ng-click="encrypt()">Encrypt</button>
-              <textarea ng-model='encrypted'></textarea>
             </div>
           </tab>
           <tab heading="Decrypt">
