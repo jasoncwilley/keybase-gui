@@ -12,6 +12,7 @@
       await openPgp.storePrivateKey(privateKey)
       $scope.apply
       $modalInstance.close key
+      
   $scope.cancel = ->
     $modalInstance.dismiss 'cancel'
   ]
