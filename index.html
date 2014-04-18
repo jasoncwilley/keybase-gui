@@ -20,7 +20,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#">Import Privatekey from Keybase</a></li>
-        <li><a href="#">Import Privatekey from String</a></li>
+        <li><a href="#" ng-click="openImportStringModal()">Import Privatekey from String</a></li>
       </ul>
     </div>
   </nav>
@@ -112,20 +112,27 @@
   </div>
 
 
+  <script type="text/ng-template" id="loginModalTemplate.html">
+    <div ng-controller='LoginController'>
+      <h2>Login</h2>
+      <input ng-model="username" />
+      <input type="password" ng-model="password" />
+      <button class="btn" ng-click="login()">Log In</button>
+    </div>
+  </script>
 
-  <div ng-controller='ImportPrivateKeyController'>
-    <h2>Import Your Privatekey</h2>
-    <textarea ng-model='key'></textarea>
-    <button class="btn" ng-click="importKey()">Import</button>
-  </div>
-
-  <div ng-controller='LoginController'>
-    <h2>Login</h2>
-    <input ng-model="username" />
-    <input type="password" ng-model="password" />
-    <button class="btn" ng-click="login()">Log In</button>
-  </div>
-
+  <script type="text/ng-template" id="importPrivateKeyModalTemplate.html">
+    <div class="modal-header">
+      <h3>Import Your Privatekey</h3>
+    </div>
+    <div class="modal-body">
+      <textarea ng-model='key'></textarea>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" ng-click="importKey()">Import</button>
+      <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+  </script>
 
   <script type="text/ng-template" id="passwordModalTemplate.html">
     <div class="modal-header">
