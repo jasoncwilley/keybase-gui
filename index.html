@@ -7,22 +7,46 @@
     <script src="build/js/app.js"></script>
 </head>
 <body ng-controller="KeybaseGuiApplicationController">
-  <nav class="navbar navbar-default" role="navigation">
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container-fluid">
-      <div class="navbar-header">
+      <div class="navbar-inner">
+        <div class="navbar-header">
 
-      </div>
-      <ul class="nav navbar-form navbar-nav navbar-left">
+        </div>
+        <ul class="nav navbar-nav window-controls">
           <li>
-            <div class="form-group">
-              <private-key-select ng-model='data.selectedPrivateKey'></private-key-select>
-            </div>
+            <a href="#" ng-click="closeWindow()">
+              <i class="close-icon glyphicon glyphicon-remove-sign"></i>
+            </a>
           </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#" ng-click="openLoginModal()">Import Privatekey from Keybase</a></li>
-        <li><a href="#" ng-click="openImportStringModal()">Import Privatekey from String</a></li>
-      </ul>
+          <li>
+            <a href="#" ng-click="minimizeWindow()">
+              <i class="minimize-icon glyphicon glyphicon-minus-sign"></i>
+            </a>
+          </li>
+          <li>
+            <a href="#" ng-click="maximizeWindow()">
+              <i class="maximize-icon glyphicon glyphicon-plus-sign"></i>
+            </a>
+          </li>
+        </ul>
+        <ul class="nav navbar-form nav-center">
+            <li>
+              <div class="form-group">
+                <private-key-select ng-model='data.selectedPrivateKey'></private-key-select>
+              </div>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Import Private-Key <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="#" ng-click="openLoginModal()">From Keybase</a></li>
+              <li><a href="#" ng-click="openImportStringModal()">From String</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
     </div>
   </nav>
   <div class='container-fluid'>

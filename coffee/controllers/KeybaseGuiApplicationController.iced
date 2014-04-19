@@ -18,5 +18,21 @@
     }
 
     await $modalInstance.result.then defer key
+    
+  $scope.closeWindow = ->
+    gui = require('nw.gui')
+    window = gui.Window.get()
+    window.close()
+    
+  $scope.minimizeWindow = ->
+    gui = require('nw.gui')
+    window = gui.Window.get()
+    window.minimize()
+    
+  $scope.maximizeWindow = ->
+    gui = require('nw.gui')
+    window = gui.Window.get()
+    window.maximize()
+  
 
 ]

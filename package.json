@@ -26,6 +26,7 @@
   },
   "window": {
     "toolbar": true,
+    "frame": false,
     "width": 850,
     "height": 500,
     "min_width": 850,
