@@ -1,0 +1,38 @@
+nav {
+  -webkit-app-region: drag;
+}
+
+a {
+  -webkit-app-region: no-drag;
+}
+
+select {
+  -webkit-app-region: no-drag;
+}
+
+.nav.nav-center {
+    float:none;
+    display: inline-block;
+    margin: 15px auto;
+}
+
+.navbar-inner{
+    text-align:center;
+}
+
+ul.window-controls li a {
+  padding-left: 7px;
+  padding-right: 7px;
+}
+
+.close-icon {
+  color: red;
+}
+
+.minimize-icon {
+  color: orange;
+}
+
+.maximize-icon {
+  color: green;
+}
