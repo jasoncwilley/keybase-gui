@@ -1,5 +1,5 @@
-@keybaseGui.controller 'VerifyCleartextMessageController', ["$scope", "openPGP",
-"keybaseApi", ($scope, openPgp, keybaseApi) ->
+@keybaseGui.controller 'VerifyCleartextMessageController', ["$scope",
+"openPGP", "keybaseApi", ($scope, openPgp, keybaseApi) ->
   
   $scope.modes = ["signed", "verified"]
   $scope.mode = $scope.modes[0]
@@ -26,7 +26,8 @@
     defer kbResolvedKeys, kbUnresolvedKeys
 
     $scope.data.signers = $scope.data.signers.concat kbResolvedKeys
-    await openPgp.getCleartextMessageText $scope.data.signedMessage, defer text
+    await openPgp.getCleartextMessageText $scope.data.signedMessage,
+    defer text
 
     $scope.data.verifiedMessage = text
     $scope.mode = $scope.modes[1]
