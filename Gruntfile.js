@@ -20,7 +20,8 @@ module.exports = function (grunt) {
     sass: {
       dist: {
         options: {
-          style: 'expanded'
+          style: 'expanded',
+	  loadPath: ['bower_components/bootstrap-sass-official/vendor/assets/stylesheets']
         },
         files: {
           'build/css/app.css': 'build/sass/app.scss'
@@ -32,10 +33,8 @@ module.exports = function (grunt) {
         separator: ';',
       },
       jsLibs: {
-        src: ['bower_components/jquery/dist/jquery.js',
-              'bower_components/angular/angular.js',
+        src: ['bower_components/angular/angular.js',
               'bower_components/angular-animate/angular-animate.js',
-              'bower_components/bootstrap/dist/js/bootstrap.js',
               'bower_components/angular-cookies/angular-cookies.js',
               'bower_components/angularLocalStorage/src/angularLocalStorage.js',
               'bower_components/angular-strap/dist/angular-strap.js',
@@ -45,10 +44,8 @@ module.exports = function (grunt) {
         dest: 'build/js/libs.js',
       },
       cssLibs: {
-        src: ['bower_components/bootstrap/dist/css/bootstrap.css',
-              'bower_components/bootstrap/dist/css/bootstrap-theme.css',
-              'bower_components/animate.css/animate.css'],
-        dest: 'build/css/bootstrap.css'
+        src: ['bower_components/animate.css/animate.css'],
+        dest: 'build/css/libs.css'
       },
       sassStyles: {
         src: ['sass/**/*.scss'],
@@ -58,7 +55,7 @@ module.exports = function (grunt) {
     copy: {
       bootstrapFonts: {
         expand: true,
-        cwd: 'bower_components/bootstrap/dist/fonts/',
+        cwd: 'bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap',
         src: '*',
         dest: 'build/fonts/',
         flatten: true,
