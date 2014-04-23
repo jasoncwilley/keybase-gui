@@ -110,8 +110,8 @@ module.exports = function (grunt) {
         version: "0.8.5",
         mac: true, // We want to build it for mac
         win: true, // We want to build it for win
-        linux32: false, // We don't need linux32
-        linux64: false // We don't need linux64
+        linux32: true, // We do need linux32
+        linux64: true // We do need linux64
       },
       src: ['build/**', './node_modules/**', '!./node_modules/grunt*/**',
              '!./node_modules/nodewebkit*/**', './index.html', './package.json',
