@@ -73,6 +73,18 @@ module.exports = function (grunt) {
       build: ['build/'],
       release: ['webkitbuilds/releases']
     },
+    uglify : {
+      libs: {
+        files: {
+          './build/js/libs.js': ['./build/js/libs.js']
+        }
+      },
+      app: {
+        files: {
+          './build/js/app.js': ['./build/js/app.js']
+        }
+      }
+    },
     watch: {
       jsApp: {
         files: ['coffee/**/*.iced'],
@@ -107,16 +119,19 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-coffeelint');
-
-  grunt.registerTask('dev', ['build', 'watch']);
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  
+  grunt.registerTask('dev', ['build-dev', 'watch']);
 
   grunt.registerTask('build-js-libs', ['concat:jsLibs']);
   grunt.registerTask('build-js-app', ['coffeelint', 'coffee']);
-  grunt.registerTask('build-js', ['build-js-libs', 'build-js-app']);
+  grunt.registerTask('build-js-dev', ['build-js-libs', 'build-js-app']);
+  grunt.registerTask('build-js', ['build-js-dev', 'uglify']);
   grunt.registerTask('build-css', ['concat:sassStyles', 'sass', 'build-css-libs']);
   grunt.registerTask('build-css-libs', ['concat:cssLibs']);
   grunt.registerTask('build-fonts', ['copy:bootstrapFonts']);
   grunt.registerTask('build-images', ['copy:images']);
+  grunt.registerTask('build-dev', ['build-js-dev', 'build-css', 'build-fonts', 'build-images']);
   grunt.registerTask('build', ['build-js', 'build-css', 'build-fonts', 'build-images']);
 
   grunt.registerTask('release', ['clean', 'build', 'nodewebkit']);
