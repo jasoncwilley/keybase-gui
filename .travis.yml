@@ -1,0 +1,7 @@
+language: javascript
+script: grunt release
+after_success: ./deploy.sh
+
+env:
+  global:
+    secure: B8nEaeQ98RDWrrufv+sBbMhqARNmiwNH8AnUxOMpQsLx6kU1XadS5kuaWsgXIZ1zrL/nHX21h9k9Fwde8LNvT1CF6xQ9U6P2jpYeVF1JTe3ggFDNlUuA0R3lN1XYl+s9f2RSEpI5i9liisF1U8FR2BQp1dXp4xWtJyC/i8RpbDw=
