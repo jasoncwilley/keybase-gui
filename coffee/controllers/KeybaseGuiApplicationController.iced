@@ -1,6 +1,6 @@
 @keybaseGui.controller 'KeybaseGuiApplicationController', [ '$rootScope',
-'$scope', 'openPGP', '$modal', 'keybaseGuiConfig', '$http',
-($rootScope, $scope, openPgp, $modal, keybaseGuiConfig, $http) ->
+'$scope', 'openPGP', '$modal', 'keybaseGuiConfig', '$http', '$interval',
+($rootScope, $scope, openPgp, $modal, keybaseGuiConfig, $http, $interval) ->
   $rootScope.data = {}
   $rootScope.data.selectedPrivateKey = openPgp.getStoredPrivateKeysSync()[0]
 
@@ -46,6 +46,20 @@
   $scope.closeAlert = (index) ->
     $scope.alerts.splice(index, 1)
 
+  $scope.checkForUpdates = ->
+    await $http.get(keybaseGuiConfig.updateServer + 'version.txt')
+    .success defer data, status
+
+    remoteVersion = parseInt data
+    localVersion = keybaseGuiConfig.version
+
+    if remoteVersion > localVersion
+      downloadLink = getRemoteDownloadLink remoteVersion
+      $scope.addAlert(
+        "There's a new version of Keybase-Gui! You can download it
+        <a href='#{downloadLink}'>here</a>.",
+        "info"
+      )
 
   getRemoteDownloadLink = (version) ->
     os = require('os')
@@ -69,19 +83,6 @@
 
     "#{server}#{name}.#{plat}.#{version}.zip"
 
-  await $http.get(keybaseGuiConfig.updateServer + 'version.txt')
-  .success defer data, status
-
-  remoteVersion = parseInt data
-  localVersion = keybaseGuiConfig.version
-
-  if remoteVersion > localVersion
-    downloadLink = getRemoteDownloadLink remoteVersion
-    $scope.addAlert(
-      "There's a new version of Keybase-Gui! You can download it
-      <a href='#{downloadLink}'>here</a>.",
-      "info"
-    )
-
-
+  $scope.checkForUpdates()
+  $interval($scope.checkForUpdates, 1000 * 60)
 ]
