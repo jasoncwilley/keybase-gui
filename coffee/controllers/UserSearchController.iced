@@ -20,6 +20,9 @@
 
   $scope.getSuggestions = (typed) ->
     keybaseApi.autocompletePromise(typed).then (res) ->
+      if res.data.status.code != 0
+        return []
+        
       completions = res.data.completions
       completions.sort (a, b) ->
         b.totalScore - a.totalScore

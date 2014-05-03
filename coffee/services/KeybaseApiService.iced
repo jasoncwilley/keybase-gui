@@ -36,10 +36,20 @@
     hmac_pwh = hmac_pw.toString('hex')
 
     cb err, hmac_pwh
+
   {
     login: (username, password, cb) ->
       await get_salt username, defer err, salt, login_session
+
+      if err?
+        cb err, null, null
+        return
+
       await gen_hmac_pwh password, salt, login_session, defer err, hmac_pwh
+
+      if err?
+        cb err, null, null
+        return
 
       url = "#{baseUrl}/login.json"
 
@@ -68,6 +78,11 @@
       url = "#{baseUrl}/user/autocomplete.json?q=#{query}"
 
       await $http.get(url).then defer result
+
+      if result.data.status.code != 0
+        cb new Error(result.data.status.desc), []
+        return
+
       completions = result.data.completions
 
       completions.sort (a, b) ->
@@ -78,7 +93,7 @@
       angular.forEach completions, (value, index) ->
         results.push value.components.username.val
 
-      cb results
+      cb null, results
 
     autocompletePromise: (query) ->
       url = "#{baseUrl}/user/autocomplete.json?q=#{query}"
@@ -89,18 +104,26 @@
 
       await $http.get(url).then defer result
 
+      if result.data.status.code != 0
+        cb new Error(result.data.status.desc), null
+        return
+
       key = result.data.keys[0]
 
-      cb key
+      cb null, key
 
     resolveKeyIds: (keyIds, cb) ->
       notResolvedKeys = []
       resolvedKeys = []
+
       for keyId in keyIds
         keyIdOptimized = openPgp.hexstrdump keyId.bytes
         url = "#{baseUrl}/key/fetch.json?pgp_key_ids=#{keyIdOptimized}&ops=4"
 
         await $http.get(url).then defer result
+
+        if result.data.status.code != 0
+          cb new Error(result.data.status.desc), resolvedKeys, notResolvedKeys
 
         key = result.data.keys[0]
 
@@ -112,7 +135,7 @@
         else
           notResolvedKeys.push keyId
 
-      cb resolvedKeys, notResolvedKeys
+      cb null, resolvedKeys, notResolvedKeys
 
     logout: (cb) ->
       if !!$http.defaults.headers.common.Cookie
