@@ -50,6 +50,7 @@ module.exports = function (grunt) {
               'bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/popover.js',
               'bower_components/angular/angular.js',
               'bower_components/angular-animate/angular-animate.js',
+              'bower_components/angular-sanitize/angular-sanitize.js',
               'bower_components/angular-cookies/angular-cookies.js',
               'bower_components/angularLocalStorage/src/angularLocalStorage.js',
               'bower_components/angular-strap/dist/angular-strap.js',
@@ -118,7 +119,8 @@ module.exports = function (grunt) {
         },
         constants: {
           keybaseGuiConfig: {
-            version: buildNumber
+            version: buildNumber,
+            updateServer: 'https://jhbruhn.github.io/keybase-gui/'
           }
         }
       }

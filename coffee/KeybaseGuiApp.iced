@@ -2,6 +2,7 @@
 [
   'keybase-gui.config',
   'ngAnimate',
+  'ngSanitize',
   'angularLocalStorage',
   'ui.bootstrap.tpls',
   'ui.bootstrap.transition',
@@ -9,5 +10,6 @@
   'ui.bootstrap.modal',
   'ui.bootstrap.typeahead',
   'ui.bootstrap.tabs',
+  'ui.bootstrap.alert',
   'mgcrea.ngStrap.popover'
 ]
