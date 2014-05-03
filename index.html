@@ -51,8 +51,8 @@
     </div>
   </nav>
   <div class='container-fluid'>
+    <alert ng-repeat="alert in alerts" type="alert.type" ng-bind-html="alert.msg" close="closeAlert($index)"></alert>
     <div class='row'>
-      <alert ng-repeat="alert in alerts" type="alert.type" ng-bind-html="alert.msg" close="closeAlert($index)"></alert>
       <div class='col-md-3 col-xs-4'>
         <div ng-controller='FriendListController'>
           <h2>
