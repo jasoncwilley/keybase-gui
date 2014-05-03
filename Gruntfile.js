@@ -135,7 +135,8 @@ module.exports = function (grunt) {
         linux64: true // We do need linux64
       },
       src: ['build/**', './node_modules/**', '!./node_modules/grunt*/**',
-             '!./node_modules/nodewebkit*/**', './index.html', './package.json',
+             '!./node_modules/nodewebkit*/**', '!./node_modules/iced-coffee-script*/**',
+             './index.html', './package.json',
              './README.md' ]
     }
   });
