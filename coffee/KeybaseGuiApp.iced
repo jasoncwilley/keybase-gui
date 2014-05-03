@@ -1,5 +1,6 @@
 @keybaseGui = angular.module 'keybaseGui',
 [
+  'keybase-gui.config',
   'ngAnimate',
   'angularLocalStorage',
   'ui.bootstrap.tpls',

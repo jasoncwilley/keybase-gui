@@ -1,5 +1,6 @@
-@keybaseGui.controller 'KeybaseGuiApplicationController', ['$rootScope',
-'$scope', 'openPGP', '$modal', ($rootScope, $scope, openPgp, $modal) ->
+@keybaseGui.controller 'KeybaseGuiApplicationController', [ '$rootScope',
+'$scope', 'openPGP', '$modal', 'keybaseGuiConfig',
+($rootScope, $scope, openPgp, $modal, keybaseGuiConfig) ->
   $rootScope.data = {}
   $rootScope.data.selectedPrivateKey = openPgp.getStoredPrivateKeysSync()[0]
 
@@ -18,21 +19,21 @@
     }
 
     await $modalInstance.result.then defer key
-    
+
   $scope.closeWindow = ->
     gui = require('nw.gui')
     window = gui.Window.get()
     window.close()
-    
+
   $scope.minimizeWindow = ->
     gui = require('nw.gui')
     window = gui.Window.get()
     window.minimize()
-    
+
   $scope.maximizeWindow = ->
     gui = require('nw.gui')
     window = gui.Window.get()
     window.maximize()
-  
+
 
 ]

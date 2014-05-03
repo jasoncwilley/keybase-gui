@@ -1,6 +1,9 @@
 'use strict';
 
 module.exports = function (grunt) {
+
+  var buildNumber = process.env.TRAVIS_BUILD_NUMBER || -1;
+
   // Project configuration.
   grunt.initConfig({
     coffeelint: {
@@ -92,6 +95,9 @@ module.exports = function (grunt) {
         files: {
           './build/js/app.js': ['./build/js/app.js']
         }
+      },
+      config: {
+        './build/js/config.js': ['./build/js/config.js']
       }
     },
     watch: {
@@ -102,6 +108,19 @@ module.exports = function (grunt) {
       css: {
         files: ['sass/**/*.scss'],
         tasks: ['build-css']
+      }
+    },
+    ngconstant: {
+      dist: {
+        options: {
+          name: 'keybase-gui.config',
+          dest: 'build/js/config.js'
+        },
+        constants: {
+          keybaseGuiConfig: {
+            version: buildNumber
+          }
+        }
       }
     },
     nodewebkit: {
@@ -129,17 +148,22 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-coffeelint');
   grunt.loadNpmTasks('grunt-contrib-uglify');
-  
+  grunt.loadNpmTasks('grunt-ng-constant');
+
   grunt.registerTask('dev', ['build-dev', 'watch']);
 
   grunt.registerTask('build-js-libs', ['concat:jsLibs']);
   grunt.registerTask('build-js-app', ['coffeelint', 'coffee']);
-  grunt.registerTask('build-js-dev', ['build-js-libs', 'build-js-app']);
+  grunt.registerTask('build-js-dev', ['build-js-libs', 'build-js-app', 'ngconstant']);
   grunt.registerTask('build-js', ['build-js-dev', 'uglify']);
+
   grunt.registerTask('build-css', ['concat:sassStyles', 'sass', 'build-css-libs']);
   grunt.registerTask('build-css-libs', ['concat:cssLibs']);
+
   grunt.registerTask('build-fonts', ['copy:bootstrapFonts']);
+
   grunt.registerTask('build-images', ['copy:images']);
+
   grunt.registerTask('build-dev', ['build-js-dev', 'build-css', 'build-fonts', 'build-images']);
   grunt.registerTask('build', ['build-js', 'build-css', 'build-fonts', 'build-images']);
 
