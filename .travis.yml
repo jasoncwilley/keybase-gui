@@ -3,7 +3,10 @@ install:
   - gem install sass
   - npm install
   - npm install -g grunt-cli
-script: grunt release
+  - npm install -g bower
+script:
+  - bower install 
+  - grunt release
 after_success: ./deploy.sh
 
 env:

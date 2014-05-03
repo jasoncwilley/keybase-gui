@@ -1,3 +1,6 @@
+#!/bin/sh
+set -ev
+
 if [ ${TRAVIS_JOB_NUMBER##*.} -eq 1 ] && [ "$TRAVIS_BRANCH" = "master" ]; then
 	echo "$TRAVIS_BUILD_NUMBER" > dist/version.txt
 	sudo pip install ghp-import
