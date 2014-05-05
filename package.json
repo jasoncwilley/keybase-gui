@@ -52,6 +52,6 @@
   "dependencies": {
     "gaze": "^0.6.1",
     "triplesec": "^3.0.10",
-    "openpgp": "jhbruhn/openpgpjs",
+    "openpgp": "jhbruhn/openpgpjs"
   }
 }
