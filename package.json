@@ -52,6 +52,7 @@
     "iced-coffee-script": "^1.7.1-b",
     "gaze": "^0.6.1",
     "triplesec": "^3.0.10",
-    "openpgp": "jhbruhn/openpgpjs"
+    "openpgp": "jhbruhn/openpgpjs",
+    "semver": "^2.2.1"
   }
 }

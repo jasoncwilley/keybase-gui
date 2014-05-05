@@ -48,19 +48,30 @@
 
   $scope.checkForUpdates = ->
     return if keybaseGuiConfig.debug
-    await $http.get(keybaseGuiConfig.updateServer + 'version.txt')
+
+    await $http.get(keybaseGuiConfig.updateServer + 'version.json')
     .success defer data, status
 
-    remoteVersion = parseInt data
+    remoteVersion = parseInt data.version
     localVersion = keybaseGuiConfig.version
 
-    if remoteVersion > localVersion
+    remoteBinaryVersion = data.binaryVersion
+    localBinaryVersion = keybaseGuiConfig.binaryVersion
+
+    semver = require('semver')
+
+    if semver.gt(remoteBinaryVersion, localBinaryVersion)
       downloadLink = getRemoteDownloadLink remoteVersion
       $scope.addAlert(
-        "There's a new version of Keybase-Gui! You can download it
+        "There's a new binary version of Keybase-Gui! You can download it
         <a href='#{downloadLink}'>here</a>.",
         "info"
       )
+    else if remoteVersion > localVersion
+      $scope.downloadAndUpdateNWPackage()
+
+  $scope.downloadAndUpdateNWPackage = ->
+    console.log "Not yet implemented...."
 
   getRemoteDownloadLink = (version) ->
     os = require('os')
