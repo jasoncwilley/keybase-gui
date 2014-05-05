@@ -11,13 +11,13 @@ select {
 }
 
 .nav.nav-center {
-    float:none;
-    display: inline-block;
-    margin: 15px auto;
+  float:none;
+  display: inline-block;
+  margin: 15px auto;
 }
 
 .navbar-inner{
-    text-align:center;
+  text-align: center;
 }
 
 ul.window-controls li a {
@@ -25,14 +25,28 @@ ul.window-controls li a {
   padding-right: 7px;
 }
 
-.close-icon {
-  color: red;
-}
+.window-controls {
+  .close-icon {
+    color: #FF4136;
+    
+    &:hover {
+      color: #FF851B;
+    }
+  }
 
-.minimize-icon {
-  color: orange;
-}
+  .minimize-icon {
+    color: #FF851B;
+    
+    &:hover {
+      color: #FFDC00;
+    }
+  }
 
-.maximize-icon {
-  color: green;
+  .maximize-icon {
+    color: #3D9970;
+    
+    &:hover {
+      color: #2ECC40;
+    }
+  }
 }
