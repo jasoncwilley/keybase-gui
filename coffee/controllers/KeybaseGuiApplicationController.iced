@@ -47,6 +47,7 @@
     $scope.alerts.splice(index, 1)
 
   $scope.checkForUpdates = ->
+    return if keybaseGuiConfig.debug
     await $http.get(keybaseGuiConfig.updateServer + 'version.txt')
     .success defer data, status
 
