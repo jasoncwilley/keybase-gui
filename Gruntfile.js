@@ -3,6 +3,10 @@
 module.exports = function (grunt) {
 
   var buildNumber = process.env.TRAVIS_BUILD_NUMBER || -1;
+  var distFiles = ['build/**', './node_modules/**', '!./node_modules/grunt*/**',
+             '!./node_modules/nodewebkit*/**',
+             './index.html', './package.json',
+             './README.md' ];
 
   // Project configuration.
   grunt.initConfig({
@@ -132,12 +136,11 @@ module.exports = function (grunt) {
         mac: true, // We want to build it for mac
         win: true, // We want to build it for win
         linux32: true, // We do need linux32
-        linux64: true // We do need linux64
+        linux64: true, // We do need linux64
+        keep_nw: true
+
       },
-      src: ['build/**', './node_modules/**', '!./node_modules/grunt*/**',
-             '!./node_modules/nodewebkit*/**', '!./node_modules/iced-coffee-script*/**',
-             './index.html', './package.json',
-             './README.md' ]
+      src: distFiles
     }
   });
 
