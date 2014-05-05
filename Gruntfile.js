@@ -7,6 +7,7 @@ module.exports = function (grunt) {
              '!./node_modules/nodewebkit*/**',
              './index.html', './package.json',
              './README.md' ];
+  var debug = !process.env.CI;
 
   // Project configuration.
   grunt.initConfig({
@@ -124,7 +125,8 @@ module.exports = function (grunt) {
         constants: {
           keybaseGuiConfig: {
             version: buildNumber,
-            updateServer: 'https://jhbruhn.github.io/keybase-gui/'
+            updateServer: 'https://jhbruhn.github.io/keybase-gui/',
+            debug: debug
           }
         }
       }
