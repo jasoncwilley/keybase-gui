@@ -41,7 +41,9 @@
     "grunt-contrib-clean": "^0.5.0",
     "grunt-contrib-sass": "^0.7.3",
     "grunt-contrib-uglify": "^0.4.0",
-    "grunt-ng-constant": "^0.5.0"
+    "grunt-ng-constant": "^0.5.0",
+    "iced-coffee-script": "^1.7.1-b",
+    "grunt-coffeelint": "0.0.10"
   },
   "scripts": {
     "start": "nodewebkit"
@@ -49,9 +51,7 @@
   "keywords": [],
   "dependencies": {
     "gaze": "^0.6.1",
-    "iced-coffee-script": "^1.7.1-b",
     "triplesec": "^3.0.10",
     "openpgp": "jhbruhn/openpgpjs",
-    "grunt-coffeelint": "0.0.10"
   }
 }
