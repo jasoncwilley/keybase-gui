@@ -7,7 +7,7 @@ if [ ${TRAVIS_JOB_NUMBER##*.} -eq 1 ] && [ "$TRAVIS_BRANCH" = "master" ]; then
   for D in *; do
     if [ -d "${D}" ]; then
       FILENAME=keybase-gui.$D.$TRAVIS_BUILD_NUMBER.zip
-      zip -r $FILENAME $D/keybase-gui/
+      zip -r $FILENAME $D/
       cp $FILENAME ../../../dist/
     fi
   done
