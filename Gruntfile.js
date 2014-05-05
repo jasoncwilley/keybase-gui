@@ -9,6 +9,9 @@ module.exports = function (grunt) {
              './README.md' ];
   var debug = !process.env.CI;
 
+  var nodeWebkitVersion = "0.8.5";
+  // TODO: Move those things into a .json file or similar
+
   // Project configuration.
   grunt.initConfig({
     coffeelint: {
@@ -126,6 +129,7 @@ module.exports = function (grunt) {
           keybaseGuiConfig: {
             version: buildNumber,
             updateServer: 'https://jhbruhn.github.io/keybase-gui/',
+            binaryVersion: nodeWebkitVersion,
             debug: debug
           }
         }
@@ -134,7 +138,7 @@ module.exports = function (grunt) {
     nodewebkit: {
       options: {
         build_dir: './webkitbuilds',
-        version: "0.8.5",
+        version: nodeWebkitVersion,
         mac: true, // We want to build it for mac
         win: true, // We want to build it for win
         linux32: true, // We do need linux32
@@ -144,6 +148,18 @@ module.exports = function (grunt) {
       },
       src: distFiles
     }
+  });
+
+  grunt.registerTask('write-version-info', function(key, value) {
+    var versionFile = "dist/version.json";
+    grunt.file.mkdir("dist");
+
+    var data = {
+      version: buildNumber,
+      binaryVersion: nodeWebkitVersion
+    };
+
+    grunt.file.write(versionFile, JSON.stringify(data));
   });
 
   // These plugins provide necessary tasks.
@@ -175,5 +191,5 @@ module.exports = function (grunt) {
   grunt.registerTask('build-dev', ['build-js-dev', 'build-css', 'build-fonts', 'build-images']);
   grunt.registerTask('build', ['build-js', 'build-css', 'build-fonts', 'build-images']);
 
-  grunt.registerTask('release', ['clean', 'build', 'nodewebkit']);
+  grunt.registerTask('release', ['clean', 'build', 'nodewebkit', 'write-version-info']);
 };
