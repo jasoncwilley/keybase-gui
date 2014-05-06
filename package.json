@@ -53,6 +53,8 @@
     "gaze": "^0.6.1",
     "triplesec": "^3.0.10",
     "openpgp": "jhbruhn/openpgpjs",
-    "semver": "^2.2.1"
+    "semver": "^2.2.1",
+    "request-progress": "^0.3.1",
+    "request": "^2.34.0"
   }
 }

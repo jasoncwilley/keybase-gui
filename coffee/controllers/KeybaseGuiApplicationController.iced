@@ -1,6 +1,9 @@
 @keybaseGui.controller 'KeybaseGuiApplicationController', [ '$rootScope',
-'$scope', 'openPGP', '$modal', 'keybaseGuiConfig', '$http', '$interval',
-($rootScope, $scope, openPgp, $modal, keybaseGuiConfig, $http, $interval) ->
+'$scope', 'openPGP', '$modal', 'keybaseGuiConfig',
+'$http', '$interval', 'keybaseGuiUpdater',
+($rootScope, $scope, openPgp, $modal, keybaseGuiConfig,
+ $http, $interval, keybaseGuiUpdater) ->
+
   $rootScope.data = {}
   $rootScope.data.selectedPrivateKey = openPgp.getStoredPrivateKeysSync()[0]
 
@@ -47,53 +50,19 @@
     $scope.alerts.splice(index, 1)
 
   $scope.checkForUpdates = ->
-    return if keybaseGuiConfig.debug
-
-    await $http.get(keybaseGuiConfig.updateServer + 'version.json')
-    .success defer data, status
-
-    remoteVersion = parseInt data.version
-    localVersion = keybaseGuiConfig.version
-
-    remoteBinaryVersion = data.binaryVersion
-    localBinaryVersion = keybaseGuiConfig.binaryVersion
-
-    semver = require('semver')
-
-    if semver.gt(remoteBinaryVersion, localBinaryVersion)
-      downloadLink = getRemoteDownloadLink remoteVersion
-      $scope.addAlert(
-        "There's a new binary version of Keybase-Gui! You can download it
-        <a href='#{downloadLink}'>here</a>.",
-        "info"
-      )
-    else if remoteVersion > localVersion
-      $scope.downloadAndUpdateNWPackage()
+    keybaseGuiUpdater.checkForUpdates()
 
   $scope.downloadAndUpdateNWPackage = ->
     console.log "Not yet implemented...."
 
-  getRemoteDownloadLink = (version) ->
-    os = require('os')
+  $rootScope.$on 'updater:binary-update-available', (event, args) ->
+    $scope.addAlert(
+      "There's a new binary version of Keybase-Gui! You can download it
+      <a href='#{args.url}'>here</a>.",
+      "info"
+    )
 
-    server = keybaseGuiConfig.updateServer
-    name ="keybase-gui"
 
-    platform = os.platform()
-    plat = ""
-
-    if platform == 'linux'
-      plat = "linux"
-      if os.arch() == "x64"
-        plat += "64"
-      else
-        plat += "32"
-    else if platform == 'win32'
-      plat = "win"
-    else if platform == "darwin"
-      plat = "mac"
-
-    "#{server}#{name}.#{plat}.#{version}.zip"
 
   $scope.checkForUpdates()
   $interval($scope.checkForUpdates, 1000 * 60)
