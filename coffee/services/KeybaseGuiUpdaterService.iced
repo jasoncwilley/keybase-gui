@@ -8,6 +8,18 @@
   progress = require('request-progress')
   fs = require('fs')
 
+  if process.platform.match(/^win/)
+    ds = "\\"
+  else
+    ds = "/"
+
+  pathfrags = process.execPath.split(ds)
+  __APPDIR = ''
+  len = pathfrags.length
+  for frag, index in pathfrags when index < len-1
+    __APPDIR += frag + ds
+  console.log pathfrags
+
   getRemoteDownloadLink = (version) ->
     server = keybaseGuiConfig.updateServer
     name ="keybase-gui"
@@ -37,7 +49,7 @@
   downloadNw = (url, cb) ->
     $rootScope.$broadcast('updater:nw-update-download-started', {url: url})
 
-    file = 'keybase-gui.update.nw'
+    file = __APPDIR + 'keybase-gui.update.nw'
     
     progress(request(url))
     .on 'progress', (state) ->
@@ -53,6 +65,10 @@
 
   replaceCurrentNw = (downloadedNw, cb) ->
     console.log downloadedNw
+    await fs.rename __APPDIR + 'keybase-gui.nw',
+     __APPDIR + 'keybase-gui.old.nw', defer err
+    await fs.rename __APPDIR + 'keybase-gui.update.nw',
+     __APPDIR + 'keybase-gui.nw', defer err
 
   $rootScope.$on 'updater:nw-update-available', (event, args) ->
     downloadLink = getNwDownloadLink(args.version)
